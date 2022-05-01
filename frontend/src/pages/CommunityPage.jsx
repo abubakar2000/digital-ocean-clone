@@ -21,7 +21,7 @@ export default function CommunityPage(props) {
     const [ShowBackground, setShowBackground] = useState(window.innerWidth > 1100)
     return (
         <div className='container-fluid overflow-hidden' style={{ backgroundImage: ShowBackground ? `url(${bgC1})` : 'none', backgroundPosition: '-35% 8%', backgroundRepeat: 'no-repeat', }}>
-            <Front ShowBackground={ShowBackground}></Front>
+            {/* <Front ShowBackground={ShowBackground}></Front> */}
             <Basics></Basics>
             <TutorialsSection></TutorialsSection>
             <GetInvolvedSection></GetInvolvedSection>

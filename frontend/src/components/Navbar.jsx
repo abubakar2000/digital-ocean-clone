@@ -112,28 +112,7 @@ export default class Navbar extends Component {
                                         }}>Community <FontAwesomeIcon icon={this.state.isCommunityOpen ? faAngleUp : faAngleDown} /> </button>
 
                                     </li>
-                                    <li>
-                                        <button style={{ background: 'none', border: 'none' }} onClick={() => {
-                                            this.setState({
-                                                isProductsOpen: false,
-                                                isServiceOpen: !this.state.isServiceOpen,
-                                                isCommunityOpen: false,
-                                                isAboutOpen: false
-                                            })
-                                        }}>Service <FontAwesomeIcon icon={this.state.isServiceOpen ? faAngleUp : faAngleDown} /> </button>
-
-                                    </li>
-                                    <li>
-                                        <button style={{ background: 'none', border: 'none' }} onClick={() => {
-                                            this.setState({
-                                                isProductsOpen: false,
-                                                isServiceOpen: false,
-                                                isCommunityOpen: false,
-                                                isAboutOpen: !this.state.isAboutOpen
-                                            })
-                                        }}>About <FontAwesomeIcon icon={this.state.isAboutOpen ? faAngleUp : faAngleDown} /> </button>
-
-                                    </li>
+                                   
                                 </ul>
                             </nav>
                         </div>
