@@ -10,7 +10,6 @@ import { apiip } from '../serverConfig';
 export default class Navbar extends Component {
 
     constructor(props) {
-
         super(props);
         this.state = {
             isProductsOpen: false,
@@ -35,11 +34,12 @@ export default class Navbar extends Component {
         axios.get(`${apiip}/products/api/products/`)
             .then(res => {
                 this.setState({ products: res.data.data })
-                // console.log(this.state.products);
+                console.log(this.state.products);
             })
             .catch(err => {
                 alert("Cannot load products")
             })
+
     }
 
     loadtutorialsData = () => {
@@ -112,7 +112,7 @@ export default class Navbar extends Component {
                                         }}>Community <FontAwesomeIcon icon={this.state.isCommunityOpen ? faAngleUp : faAngleDown} /> </button>
 
                                     </li>
-                                   
+
                                 </ul>
                             </nav>
                         </div>
