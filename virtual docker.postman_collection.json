@@ -1,0 +1,864 @@
+{
+	"info": {
+		"_postman_id": "a920bc2e-3c7e-4965-9d72-1d718cba16f6",
+		"name": "virtual docker",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "account",
+			"item": [
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "admin\n",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}api/accounts/auth/login/",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"accounts",
+								"auth",
+								"login",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "username",
+									"value": "shehrozkapoor",
+									"type": "text"
+								},
+								{
+									"key": "password1",
+									"value": "admin123",
+									"type": "text"
+								},
+								{
+									"key": "password2",
+									"value": "admin123",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "shehrozkapoor@gmail.com",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}api/accounts/auth/registration/",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"accounts",
+								"auth",
+								"registration",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "userinfo",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}api/accounts/auth/user/",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"accounts",
+								"auth",
+								"user",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update userinfo",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "username",
+									"value": "shehrozkapoor",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "admin",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "shehrozkapoor@gmail.com",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}api/accounts/auth/user/",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"accounts",
+								"auth",
+								"user",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "send verification otp",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}api/accounts/sendotp",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"accounts",
+								"sendotp"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "verify verification otp",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "otp",
+									"value": "2558",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}api/accounts/verifyotp/?otp=255",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"accounts",
+								"verifyotp",
+								""
+							],
+							"query": [
+								{
+									"key": "otp",
+									"value": "255"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "change password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "new_password1",
+									"value": "admin",
+									"type": "text"
+								},
+								{
+									"key": "new_password2",
+									"value": "admin",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}api/accounts/auth/password/change/",
+							"host": [
+								"{{URL}}api"
+							],
+							"path": [
+								"accounts",
+								"auth",
+								"password",
+								"change",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "search",
+			"item": [
+				{
+					"name": "search whole website",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}core/api/searchwhole/?search_params=abc",
+							"host": [
+								"{{URL}}core"
+							],
+							"path": [
+								"api",
+								"searchwhole",
+								""
+							],
+							"query": [
+								{
+									"key": "search_params",
+									"value": "abc"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "search all question",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}community/api/searchquestion/",
+							"host": [
+								"{{URL}}community"
+							],
+							"path": [
+								"api",
+								"searchquestion",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "search specific question",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}community/api/searchquestion/?search_params=ds",
+							"host": [
+								"{{URL}}community"
+							],
+							"path": [
+								"api",
+								"searchquestion",
+								""
+							],
+							"query": [
+								{
+									"key": "search_params",
+									"value": "ds"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "search docs",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}docs/api/searchdocs/?search_params=a",
+							"host": [
+								"{{URL}}docs"
+							],
+							"path": [
+								"api",
+								"searchdocs",
+								""
+							],
+							"query": [
+								{
+									"key": "search_params",
+									"value": "a"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Blog",
+			"item": [
+				{
+					"name": "get blog by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}blog/api/blog/?blog_id=1",
+							"host": [
+								"{{URL}}blog"
+							],
+							"path": [
+								"api",
+								"blog",
+								""
+							],
+							"query": [
+								{
+									"key": "blog_id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get All blog",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}blog/api/blog/",
+							"host": [
+								"{{URL}}blog"
+							],
+							"path": [
+								"api",
+								"blog",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "community",
+			"item": [
+				{
+					"name": "tutorials",
+					"item": [
+						{
+							"name": "get all tutorials",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}community/api/tutorials/",
+									"host": [
+										"{{URL}}community"
+									],
+									"path": [
+										"api",
+										"tutorials",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "questions",
+					"item": [
+						{
+							"name": "get all questions",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}community/api/question/",
+									"host": [
+										"{{URL}}community"
+									],
+									"path": [
+										"api",
+										"question",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "answer",
+					"item": [
+						{
+							"name": "post a answer",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "question_id",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "answer",
+											"value": "dssadaskjb",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{URL}}community/api/answer/",
+									"host": [
+										"{{URL}}community"
+									],
+									"path": [
+										"api",
+										"answer",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update the answer",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "answer_id",
+											"value": "2",
+											"type": "text"
+										},
+										{
+											"key": "answer",
+											"value": "abc",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{URL}}community/api/answer/",
+									"host": [
+										"{{URL}}community"
+									],
+									"path": [
+										"api",
+										"answer",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete answer",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "answer_id",
+											"value": "2",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{URL}}community/api/answer/",
+									"host": [
+										"{{URL}}community"
+									],
+									"path": [
+										"api",
+										"answer",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "comment",
+					"item": [
+						{
+							"name": "post a comment",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "question_id",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "comment",
+											"value": "dssadaskjb",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{URL}}community/api/comment/",
+									"host": [
+										"{{URL}}community"
+									],
+									"path": [
+										"api",
+										"comment",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update the comment",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "comment_id",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "comment",
+											"value": "abc",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{URL}}community/api/comment/",
+									"host": [
+										"{{URL}}community"
+									],
+									"path": [
+										"api",
+										"comment",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete comment",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "comments_id",
+											"value": "1",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{URL}}community/api/comment/",
+									"host": [
+										"{{URL}}community"
+									],
+									"path": [
+										"api",
+										"comment",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Docs",
+			"item": [
+				{
+					"name": "get all docs",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}docs/api/docs",
+							"host": [
+								"{{URL}}docs"
+							],
+							"path": [
+								"api",
+								"docs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all docs with product id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}docs/api/docs/?product_id=1",
+							"host": [
+								"{{URL}}docs"
+							],
+							"path": [
+								"api",
+								"docs",
+								""
+							],
+							"query": [
+								{
+									"key": "product_id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get doc with id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}docs/api/docs?doc_id=1",
+							"host": [
+								"{{URL}}docs"
+							],
+							"path": [
+								"api",
+								"docs"
+							],
+							"query": [
+								{
+									"key": "doc_id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "products",
+			"item": [
+				{
+					"name": "products",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}products/api/products/",
+							"host": [
+								"{{URL}}products"
+							],
+							"path": [
+								"api",
+								"products",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "pricing plan",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}products/api/pricing-plan/",
+							"host": [
+								"{{URL}}products"
+							],
+							"path": [
+								"api",
+								"pricing-plan",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get specific products",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}products/api/product-by-id/?id=1",
+							"host": [
+								"{{URL}}products"
+							],
+							"path": [
+								"api",
+								"product-by-id",
+								""
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "solution",
+			"item": [
+				{
+					"name": "get all solution",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}solution/api/solutions/",
+							"host": [
+								"{{URL}}solution"
+							],
+							"path": [
+								"api",
+								"solutions",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get specific solution",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}solution/api/solutions/?solution_id=1",
+							"host": [
+								"{{URL}}solution"
+							],
+							"path": [
+								"api",
+								"solutions",
+								""
+							],
+							"query": [
+								{
+									"key": "solution_id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"pm.request.headers.add({key: 'Authorization', value: 'Token 72d393fc263e98d9513669747a9ca10089acd2c4' });"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "URL",
+			"value": "http://40.86.23.218/",
+			"type": "string"
+		}
+	]
+}
