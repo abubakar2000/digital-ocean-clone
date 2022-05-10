@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import bg from '../img/bg.jpg'
 import droplet_basics from '../img/droplet_basics.svg'
@@ -6,6 +6,7 @@ import green_checkmark from '../img/green_checkmark.svg'
 import droplet_premium from '../img/droplet_premium.svg'
 
 export default function ProductPage() {
+    
     return (
         <div className='container-fluid'>
             <div className="row front-bg text-light" style={{ backgroundImage: `url(${bg})`, backgroundRepeat: 'no-repeat', backgroundSize: 'cover', }}>
