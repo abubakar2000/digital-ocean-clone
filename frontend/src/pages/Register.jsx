@@ -3,25 +3,35 @@ import { useNavigate } from "react-router";
 import axios from "axios";
 import { apiip } from "../serverConfig";
 
-export default function Login() {
+export default function Register() {
   const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirm_password, setConfirm_Password] = useState("");
   let navigate = useNavigate();
-  const login = () => {
-    if (username === "" || password === "") {
+
+  const register = () => {
+    if (
+      username === "" ||
+      email === "" ||
+      password === "" ||
+      confirm_password === ""
+    ) {
       alert("Input data!");
     } else {
       const body = {
         username: username,
-        password: password,
+        email: email,
+        password1: password,
+        password2: confirm_password,
       };
 
       axios
-        .post(`${apiip}/api/accounts/auth/login/`, body)
+        .post(`${apiip}/api/accounts/auth/registration/`, body)
         .then((res) => {
           if (res.status === 200) {
             console.log("Res -> ", res);
-            navigate("/home");
+            navigate("/login");
           }
         })
         .catch((err) => {
@@ -30,51 +40,65 @@ export default function Login() {
     }
   };
 
-  const setIsLoggedIn = () => {
-    localStorage.setItem("isLoggedIn", "true");
-    login();
-  };
-
   useEffect(() => {
-    document.title = "Login";
+    document.title = "Register";
   }, []);
 
   return (
     <div className="login container-fluid">
       <div className="col-md-4 rounded-3 my-5" style={{ margin: "0 auto" }}>
-        <form className="login-form text-left" action="#">
-          <h2>Log in to your account</h2>
+        <div className="login-form text-left">
+          <h2>Register your account</h2>
           <div className="mb-3">
-            <label htmlFor="email">email</label>
+            <label htmlFor="email">User name</label>
             <input
               type="text"
               className="form-control"
-              id="email"
-              placeholder="Email address or phone number"
+              id="username"
+              placeholder="User name"
               value={username}
               onInput={(e) => setUsername(e.target.value)}
             />
           </div>
           <div className="mb-3">
-            <label htmlFor="pass">password</label>
+            <label htmlFor="pass">Email</label>
             <input
               type="password"
-              id="pass"
+              id="email"
+              className="form-control"
+              placeholder="Email"
+              value={email}
+              onInput={(e) => setEmail(e.target.value)}
+            />
+          </div>
+          <div className="mb-3">
+            <label htmlFor="pass">Password</label>
+            <input
+              type="password"
+              id="password"
               className="form-control"
               placeholder="Password"
               value={password}
               onInput={(e) => setPassword(e.target.value)}
             />
           </div>
-          <div>
-            <a href="/register">New user?</a>
+          <div className="mb-3">
+            <label htmlFor="pass">Confirm Password</label>
+            <input
+              type="password"
+              id="confirm-password"
+              className="form-control"
+              placeholder="Confirm Password"
+              value={confirm_password}
+              onInput={(e) => setConfirm_Password(e.target.value)}
+            />
           </div>
           <button
             type="button"
             className="btn btn-custom btn-lg btn-block mt-3"
-            onClick={() => setIsLoggedIn()}
+            onClick={() => register()}
           >
-            Login
+            Register
           </button>
           <div className="text-center pt-3 pb-3">
             <hr />
@@ -91,8 +115,8 @@ export default function Login() {
               Sign In With Github
             </button>
           </div>
-          <a href="/resetpassword">Forgotten password?</a>
-        </form>
+          <a href="/login">Already a user?</a>
+        </div>
       </div>
     </div>
   );
