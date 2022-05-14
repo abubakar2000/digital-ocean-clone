@@ -6,6 +6,10 @@ import { apiip } from "../serverConfig";
 export default function Register() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
+  let testRegex =
+    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/gi;
+  let ValidatedEmail = testRegex.test(email);
+
   const [password, setPassword] = useState("");
   const [confirm_password, setConfirm_Password] = useState("");
   let navigate = useNavigate();
@@ -18,6 +22,12 @@ export default function Register() {
       confirm_password === ""
     ) {
       alert("Input data!");
+    } else if (ValidatedEmail === false) {
+      alert("Enter valid email.");
+    } else if (password.length < 6 || confirm_password.length < 6) {
+      alert("Password must be a minimum of 6 characters.");
+    } else if (password !== confirm_password) {
+      alert("The two password fields didn't match.");
     } else {
       const body = {
         username: username,
@@ -26,16 +36,26 @@ export default function Register() {
         password2: confirm_password,
       };
 
+      console.log("body -> ", body);
+
       axios
         .post(`${apiip}/api/accounts/auth/registration/`, body)
         .then((res) => {
-          if (res.status === 200) {
+          console.log(res);
+          if (res.status === 201) {
             console.log("Res -> ", res);
+            alert("User Registration Successful!");
             navigate("/login");
           }
         })
         .catch((err) => {
-          alert("Cannot login!");
+          if (err.response.data.password1) {
+            alert(err.response.data.password1);
+          } else if (err.response.data.username) {
+            alert(err.response.data.username);
+          } else if (err.response.data.email) {
+            alert(err.response.data.email);
+          }
         });
     }
   };
@@ -45,13 +65,26 @@ export default function Register() {
   }, []);
 
   return (
-    <div className="login container-fluid">
-      <div className="col-md-4 rounded-3 my-5" style={{ margin: "0 auto" }}>
+    <div
+      className="login container-fluid"
+      style={{
+        minHeight: "calc(100vh - 42pt)",
+        backgroundImage:
+          "url(" +
+          "https://ui-cdn.digitalocean.com/registration/c3c4764/static/media/new-brand-bg.f4ffd8f05acc4405214a.png" +
+          ")",
+        backgroundPosition: "center",
+        backgroundSize: "cover",
+        backgroundRepeat: "no-repeat",
+      }}
+    >
+      <div className="col-md-4 rounded-3 py-5" style={{ margin: "0 auto" }}>
         <div className="login-form text-left">
           <h2>Register your account</h2>
           <div className="mb-3">
             <label htmlFor="email">User name</label>
             <input
+              style={{ color: "black" }}
               type="text"
               className="form-control"
               id="username"
@@ -63,7 +96,8 @@ export default function Register() {
           <div className="mb-3">
             <label htmlFor="pass">Email</label>
             <input
-              type="password"
+              style={{ color: "black" }}
+              type="text"
               id="email"
               className="form-control"
               placeholder="Email"
@@ -74,6 +108,7 @@ export default function Register() {
           <div className="mb-3">
             <label htmlFor="pass">Password</label>
             <input
+              style={{ color: "black" }}
               type="password"
               id="password"
               className="form-control"
@@ -85,6 +120,7 @@ export default function Register() {
           <div className="mb-3">
             <label htmlFor="pass">Confirm Password</label>
             <input
+              style={{ color: "black" }}
               type="password"
               id="confirm-password"
               className="form-control"

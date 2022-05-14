@@ -114,20 +114,36 @@ export default function ResetPassword() {
 
   const [check, setCheck] = useState(0);
   return (
-    <div className="login container-fluid">
-      <div className="col-md-4 rounded-3 my-5" style={{ margin: "0 auto" }}>
+    <div
+      className="login container-fluid"
+      style={{
+        minHeight: "calc(100vh - 42pt)",
+        backgroundImage:
+          "url(" +
+          "https://ui-cdn.digitalocean.com/registration/c3c4764/static/media/new-brand-bg.f4ffd8f05acc4405214a.png" +
+          ")",
+        backgroundPosition: "center",
+        backgroundSize: "cover",
+        backgroundRepeat: "no-repeat",
+      }}
+    >
+      <div className="col-md-4 rounded-3 py-5" style={{ margin: "0 auto" }}>
         {check === 0 ? (
           <div className="login-form text-left">
             <h2 onClick={() => console.log(ValidatedEmail)}>
-              Enter your your email
+              Forgot password?
             </h2>
+            <p className="text-muted">
+              Enter the email address associated with your account and we will
+              send you a link to reset your password.
+            </p>
             <div className="mb-3">
-              <label htmlFor="pass">Email</label>
+              <label htmlFor="pass">Email Address</label>
               <input
                 type="email"
                 id="email"
                 className="form-control"
-                placeholder="Email"
+                placeholder="Enter your email address"
                 value={email}
                 onInput={(e) => setEmail(e.target.value)}
                 style={{ color: "black" }}

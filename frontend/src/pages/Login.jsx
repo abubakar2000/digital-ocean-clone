@@ -8,26 +8,32 @@ export default function Login() {
   const [password, setPassword] = useState("");
   let navigate = useNavigate();
   const login = () => {
-    if (username === "" || password === "") {
-      alert("Input data!");
-    } else {
-      const body = {
-        username: username,
-        password: password,
-      };
+    // if (username === "" || password === "") {
+    //   alert("Input data!");
+    // } else {
+    const body = {
+      username: username,
+      password: password,
+    };
 
-      axios
-        .post(`${apiip}/api/accounts/auth/login/`, body)
-        .then((res) => {
-          if (res.status === 200) {
-            console.log("Res -> ", res);
-            navigate("/home");
-          }
-        })
-        .catch((err) => {
-          alert("Cannot login!");
-        });
-    }
+    console.log(body);
+
+    axios
+      .post(`${apiip}/api/accounts/auth/login/`, body)
+      .then((res) => {
+        if (res.status === 200) {
+          console.log("Res -> ", res);
+          navigate("/");
+        }
+      })
+      .catch((err) => {
+        if (err.response.data.non_field_errors) {
+          alert(err.response.data.non_field_errors);
+        } else if (err.response.data.password) {
+          alert(err.response.data.password);
+        }
+      });
+    // }
   };
 
   const setIsLoggedIn = () => {
@@ -40,17 +46,30 @@ export default function Login() {
   }, []);
 
   return (
-    <div className="login container-fluid">
-      <div className="col-md-4 rounded-3 my-5" style={{ margin: "0 auto" }}>
+    <div
+      className="login container-fluid"
+      style={{
+        minHeight: "calc(100vh - 42pt)",
+        backgroundImage:
+          "url(" +
+          "https://ui-cdn.digitalocean.com/registration/c3c4764/static/media/new-brand-bg.f4ffd8f05acc4405214a.png" +
+          ")",
+        backgroundPosition: "center",
+        backgroundSize: "cover",
+        backgroundRepeat: "no-repeat",
+      }}
+    >
+      <div className="col-md-4 rounded-3 py-5" style={{ margin: "0 auto" }}>
         <form className="login-form text-left" action="#">
           <h2>Log in to your account</h2>
           <div className="mb-3">
-            <label htmlFor="email">email</label>
+            <label htmlFor="email">User name</label>
             <input
+              style={{ color: "black" }}
               type="text"
               className="form-control"
-              id="email"
-              placeholder="Email address or phone number"
+              id="username"
+              placeholder="User name"
               value={username}
               onInput={(e) => setUsername(e.target.value)}
             />
@@ -58,6 +77,7 @@ export default function Login() {
           <div className="mb-3">
             <label htmlFor="pass">password</label>
             <input
+              style={{ color: "black" }}
               type="password"
               id="pass"
               className="form-control"

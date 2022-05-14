@@ -72,7 +72,7 @@ export default class Navbar extends Component {
 
   render() {
     return (
-      <div style={{ height: "117px", display: this.props.display }}>
+      <div style={{ display: this.props.display }}>
         <header
           className="header"
           style={{
@@ -181,7 +181,7 @@ export default class Navbar extends Component {
                       </div>
                     ))}
 
-                    {/* 
+                    {/*
                                         Now done by data
                                         <div className="col-md-4">
 

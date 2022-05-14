@@ -41,6 +41,7 @@ function App() {
         <Route element={<ProtectedRoutes />}>
           <Route path="/" element={<HomePage />}></Route>
           <Route path="/:page" element={<Layout />}></Route>
+          <Route path="/postdetails/:id" element={<TopicDetail />}></Route>
           {/* COMMUNITY */}
           <Route path="/community/:page" element={<CommunityPages />}></Route>
           <Route
