@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { Accordion } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { apiip } from "../../serverConfig";
 export default function Topics() {
-  const [Docs, setDocs] = useState([]);
+  const [solutions, setSolutions] = useState([]);
   useEffect(() => {
     var config = {
       method: "get",
-      url: `${apiip}/docs/api/docs`,
+      url: `${apiip}/solution/api/solutions/`,
       headers: {},
     };
 
@@ -16,7 +15,7 @@ export default function Topics() {
       .then(function (response) {
         if (response.data.status === "ok") {
           console.log(response.data.data);
-          setDocs(response.data.data);
+          setSolutions(response.data.data);
         }
       })
       .catch(function (error) {
@@ -26,18 +25,18 @@ export default function Topics() {
 
   return (
     <div className="topics">
-      <h1>Welcome to Docs</h1>
+      <h1>Welcome to the Solutions</h1>
       <hr />
 
       <div className="container-fluied px-3 py-3">
         <div className="row" style={{ justifyContent: "space-between" }}>
-          {Docs.map((item) => (
-            <Link
-              key={item.id}
-              to={"/docs/detail/" + item.id}
-              className="text-decoration-none text-black"
-            >
-              <div className="card p-1 rounded col-sm-4 mb-3">
+          {solutions.map((item) => (
+            <div className="card p-1 rounded col-sm-4 mb-3">
+              <Link
+                key={item.id}
+                to={"/solution/detail/" + item.id}
+                className="text-decoration-none text-black"
+              >
                 <div className="card-body">
                   <div className="d-flex align-items-center">
                     <img
@@ -47,12 +46,10 @@ export default function Topics() {
                     />
                   </div>
                   <h3 className="my-2">{item.title}</h3>
-                  <p className="m-0">
-                    How to Create a Droplet from the DigitalOcean Control Panel
-                  </p>
+                  <p className="m-0">{item.description.slice(0, 150)} . . .</p>
                 </div>
-              </div>
-            </Link>
+              </Link>
+            </div>
           ))}
         </div>
       </div>

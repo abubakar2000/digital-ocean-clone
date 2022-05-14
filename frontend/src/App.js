@@ -27,6 +27,9 @@ import ProtectedRoutes from "./ProtectedRoutes";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import ResetPassword from "./pages/ResetPassword";
+import DocDetails from "./components/Docs/DocDetails";
+import Solutions from "./pages/Solutions";
+import SolutionDetails from "./components/Solutions/SolutionsDetails";
 
 function App() {
   return (
@@ -54,6 +57,14 @@ function App() {
           ></Route>
           {/* Docs */}
           <Route path="/docs/:page" element={<CommunityPages />}></Route>
+          <Route path="/docs/detail/:id" element={<DocDetails />}></Route>
+
+          {/* Docs */}
+          <Route path="/solutions" element={<Solutions />}></Route>
+          <Route
+            path="/solution/detail/:id"
+            element={<SolutionDetails />}
+          ></Route>
         </Route>
       </Switch>
     </Router>
