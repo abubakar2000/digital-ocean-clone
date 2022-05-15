@@ -5,7 +5,7 @@ import Navbar from '../Navbar'
 export default function QuestionsDetail() {
     return (
         <>
-            <Navbar></Navbar>
+            {/* <Navbar></Navbar> */}
             <div className='container-fluid' style={{ backgroundColor: 'white' }}>
                 <div className="row">
                     <div className="col-md-3 text-center py-5">

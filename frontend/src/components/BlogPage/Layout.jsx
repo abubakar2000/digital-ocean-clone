@@ -15,7 +15,8 @@ export default function Layout(props) {
   return (
     <>
       {page === "community" ? (
-        <Navbar></Navbar>
+        // <Navbar></Navbar>
+        <></>
       ) : page === "login" ? (
         <></>
       ) : (

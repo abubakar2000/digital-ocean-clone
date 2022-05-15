@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleDown, faAngleUp } from "@fortawesome/fontawesome-free-solid";
@@ -20,7 +20,9 @@ export default class Navbar extends Component {
       // abm
       products: [],
       articles: [],
+      isLoggedIn: localStorage.getItem("isLoggedIn"),
     };
+    console.log(localStorage.getItem("isLoggedIn"));
   }
 
   componentDidMount() {
@@ -98,7 +100,7 @@ export default class Navbar extends Component {
                 <span></span>
               </div>
               <nav className="nav">
-                <ul>
+                <ul style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
                   <li>
                     <button
                       style={{ background: "none", border: "none" }}
@@ -139,6 +141,55 @@ export default class Navbar extends Component {
                       />{" "}
                     </button>
                   </li>
+                  {
+                    this.state.isLoggedIn !== "true" &&
+                    <li>
+                      <button
+                        style={{ background: "none", border: "none" }}
+                        onClick={() => {
+                          window.location.href = 'login'
+                        }}
+                      >
+                        Login{" "}
+                      </button>
+                    </li>}
+                  {
+                    this.state.isLoggedIn !== "true" &&
+                    <li>
+                      <div>
+                        <div
+                          style={{
+                            backgroundColor: "#0169FF", paddingTop: '5pt', paddingBottom: '5pt',
+                            paddingLeft: '10pt', paddingRight: '10pt', color: 'white', cursor: 'pointer', borderRadius: '3pt'
+                          }}
+                          onClick={() => {
+                            window.location.href = '/register'
+                          }}
+                        >
+                          Signup
+                        </div>
+                      </div>
+                    </li>}
+                  {
+                    this.state.isLoggedIn === "true" &&
+                    <li>
+                      <div>
+                        <div
+                          style={{
+                            backgroundColor: "red", paddingTop: '5pt', paddingBottom: '5pt',
+                            paddingLeft: '10pt', paddingRight: '10pt', color: 'white', cursor: 'pointer', borderRadius: '3pt'
+                          }}
+                          onClick={() => {
+                            localStorage.removeItem("isLoggedIn")
+                            this.setState({ isLoggedIn: "false" }, () => {
+                              window.location.href = '/login'
+                            })
+                          }}
+                        >
+                          Logout
+                        </div>
+                      </div>
+                    </li>}
                 </ul>
               </nav>
             </div>
@@ -180,31 +231,6 @@ export default class Navbar extends Component {
                         </ul>
                       </div>
                     ))}
-
-                    {/*
-                                        Now done by data
-                                        <div className="col-md-4">
-
-                                            <h6 className='bold'>
-                                                Compute
-                                            </h6>
-                                            <ul>
-                                                <li>Droplets</li>
-                                                <li>Kubernates</li>
-                                                <li>App Platform</li>
-                                            </ul>
-                                        </div>
-                                        <div className="col-md-4">
-
-                                            <h6 className='bold'>
-                                                Compute
-                                            </h6>
-                                            <ul>
-                                                <li>Droplets</li>
-                                                <li>Kubernates</li>
-                                                <li>App Platform</li>
-                                            </ul>
-                                        </div> */}
                   </div>
                 </div>
               </div>

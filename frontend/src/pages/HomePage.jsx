@@ -7,8 +7,9 @@ import Navbar from '../components/Navbar'
 export default function HomePage() {
     return (
         <>
-            <Navbar></Navbar>
+            
             <div>
+                <Navbar></Navbar>
                 <FrontBanner></FrontBanner>
                 <WhyUs></WhyUs>
                 <Pricing></Pricing>

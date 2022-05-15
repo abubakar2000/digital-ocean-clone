@@ -16,8 +16,24 @@ export default function FrontBanner() {
                             <p className='text-dark text-justify'>Lorem Ipsum is simply dummy text of the printing and typesetting
                                 industry. Lorem Ipsum has been the industry’s standard dummy
                                 text ever since the 1500s.</p>
-                            <button className='btn btn-primary btn-lg get-started text-ligt'>Get Started</button>
-                            <button className='btn btn-outline-primary btn-lg text-dark know-more'>Know More</button>
+                            <button onClick={() => {
+                                window.scroll({
+                                    top:window.scrollBy({
+                                        top:1*window.innerHeight,
+                                        behavior:"smooth"
+                                    })
+                                })
+                            }} className='btn btn-primary btn-lg get-started text-ligt'>Get Started</button>
+                            <button 
+                            onClick={() => {
+                                window.scroll({
+                                    top:window.scrollBy({
+                                        top:2*window.innerHeight,
+                                        behavior:"smooth"
+                                    })
+                                })
+                            }}
+                            className='btn btn-outline-primary btn-lg text-dark know-more'>Know More</button>
                         </div>
                     </div>
                     <div className="col-md-5">

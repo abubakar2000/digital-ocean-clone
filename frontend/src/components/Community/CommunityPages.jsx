@@ -11,7 +11,7 @@ export default function CommunityPages(props) {
     return (
         <>
 
-            <Navbar></Navbar>
+            {/* <Navbar></Navbar> */}
             {(page === 'tutorials') ? <Tutorials></Tutorials> : <Questions></Questions>}
 
         </>

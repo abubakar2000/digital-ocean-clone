@@ -25,9 +25,9 @@ export default function Topics() {
   }, [axios]);
 
   return (
-    <div className="topics">
-      <h1>Welcome to Docs</h1>
-      <hr />
+    <div className="topics container">
+      <h1 style={{marginTop:"3%",marginBottom:'3%'}}>Welcome to Docs</h1>
+      {/* <hr /> */}
 
       <div className="container-fluied px-3 py-3">
         <div className="row" style={{ justifyContent: "space-between" }}>

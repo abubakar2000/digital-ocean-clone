@@ -27,9 +27,9 @@ export default function DocDetails() {
   }, [axios]);
 
   return (
-    <div className="topics">
-      <h1>Welcome to Docs</h1>
-      <hr />
+    <div className="topics container">
+      <div style={{fontSize:'4vh',padding:'2%'}}>Welcome to Docs</div>
+      {/* <hr /> */}
 
       <div className="container-fluied mx-3 px-3 py-3">
         <div className="row" style={{ justifyContent: "space-between" }}>
