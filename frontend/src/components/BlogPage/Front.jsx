@@ -42,7 +42,11 @@ export default function Front() {
                       <div className="card-body p-4">
                         <div className="d-flex align-items-center">
                           <img
-                            src="https://picsum.photos/200"
+                            src={
+                              item?.image
+                                ? apiip + item.image
+                                : "https://picsum.photos/200"
+                            }
                             style={{ width: "100%", height: "200px" }}
                             alt=""
                           />
@@ -51,7 +55,11 @@ export default function Front() {
                           <div className="col-12">
                             <div className="my-3">
                               <img
-                                src="https://picsum.photos/200"
+                                src={
+                                  item?.uploaded_by?.image
+                                    ? apiip + item.uploaded_by.image
+                                    : "https://picsum.photos/200"
+                                }
                                 className="rounded-circle"
                                 style={{ width: "20px", height: "20px" }}
                                 alt=""

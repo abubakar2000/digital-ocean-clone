@@ -100,7 +100,13 @@ export default class Navbar extends Component {
                 <span></span>
               </div>
               <nav className="nav">
-                <ul style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+                <ul
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    alignItems: "center",
+                  }}
+                >
                   <li>
                     <button
                       style={{ background: "none", border: "none" }}
@@ -141,55 +147,67 @@ export default class Navbar extends Component {
                       />{" "}
                     </button>
                   </li>
-                  {
-                    this.state.isLoggedIn !== "true" &&
+                  {this.state.isLoggedIn !== "true" && (
                     <li>
                       <button
                         style={{ background: "none", border: "none" }}
                         onClick={() => {
-                          window.location.href = 'login'
+                          window.location.href = "login";
                         }}
                       >
                         Login{" "}
                       </button>
-                    </li>}
-                  {
-                    this.state.isLoggedIn !== "true" &&
+                    </li>
+                  )}
+                  {this.state.isLoggedIn !== "true" && (
                     <li>
                       <div>
                         <div
                           style={{
-                            backgroundColor: "#0169FF", paddingTop: '5pt', paddingBottom: '5pt',
-                            paddingLeft: '10pt', paddingRight: '10pt', color: 'white', cursor: 'pointer', borderRadius: '3pt'
+                            backgroundColor: "#0169FF",
+                            paddingTop: "5pt",
+                            paddingBottom: "5pt",
+                            paddingLeft: "10pt",
+                            paddingRight: "10pt",
+                            color: "white",
+                            cursor: "pointer",
+                            borderRadius: "3pt",
                           }}
                           onClick={() => {
-                            window.location.href = '/register'
+                            window.location.href = "/register";
                           }}
                         >
                           Signup
                         </div>
                       </div>
-                    </li>}
-                  {
-                    this.state.isLoggedIn === "true" &&
+                    </li>
+                  )}
+                  {this.state.isLoggedIn === "true" && (
                     <li>
                       <div>
                         <div
                           style={{
-                            backgroundColor: "red", paddingTop: '5pt', paddingBottom: '5pt',
-                            paddingLeft: '10pt', paddingRight: '10pt', color: 'white', cursor: 'pointer', borderRadius: '3pt'
+                            backgroundColor: "red",
+                            paddingTop: "5pt",
+                            paddingBottom: "5pt",
+                            paddingLeft: "10pt",
+                            paddingRight: "10pt",
+                            color: "white",
+                            cursor: "pointer",
+                            borderRadius: "3pt",
                           }}
                           onClick={() => {
-                            localStorage.removeItem("isLoggedIn")
+                            localStorage.removeItem("isLoggedIn");
                             this.setState({ isLoggedIn: "false" }, () => {
-                              window.location.href = '/login'
-                            })
+                              window.location.href = "/login";
+                            });
                           }}
                         >
                           Logout
                         </div>
                       </div>
-                    </li>}
+                    </li>
+                  )}
                 </ul>
               </nav>
             </div>
@@ -294,7 +312,7 @@ export default class Navbar extends Component {
                       <ul>
                         <li>
                           <Link
-                            to={"/community/write-for-donations"}
+                            to={"/community"}
                             className="text-dark text-decoration-none"
                           >
                             Write for Donations
@@ -303,7 +321,7 @@ export default class Navbar extends Component {
 
                         <li>
                           <Link
-                            to={"/community/meetups"}
+                            to={"/community"}
                             className="text-dark text-decoration-none"
                           >
                             Meetups
@@ -312,7 +330,7 @@ export default class Navbar extends Component {
 
                         <li>
                           <Link
-                            to={"/community/hatch-startup-program"}
+                            to={"/community"}
                             className="text-dark text-decoration-none"
                           >
                             Hatch Startup Program
@@ -337,7 +355,12 @@ export default class Navbar extends Component {
                                   />
                                 </div>
                                 <div className="col-8 text-left">
-                                  <p>{art.title}</p>
+                                  <Link
+                                    to={"/postdetails/" + art.id}
+                                    className="text-black text-decoration-none"
+                                  >
+                                    <p>{art.title}</p>
+                                  </Link>
                                 </div>
                               </div>
                             </li>

@@ -30,6 +30,7 @@ import ResetPassword from "./pages/ResetPassword";
 import DocDetails from "./components/Docs/DocDetails";
 import Solutions from "./pages/Solutions";
 import SolutionDetails from "./components/Solutions/SolutionsDetails";
+import Search from "./pages/Search";
 
 function App() {
   return (
@@ -48,7 +49,7 @@ function App() {
           {/* COMMUNITY */}
           <Route path="/community/:page" element={<CommunityPages />}></Route>
           <Route
-            path="/community/tutorials/:topic"
+            path="/community/tutorials/:id"
             element={<TutorialsDetail />}
           ></Route>
           <Route
@@ -59,12 +60,15 @@ function App() {
           <Route path="/docs/:page" element={<CommunityPages />}></Route>
           <Route path="/docs/detail/:id" element={<DocDetails />}></Route>
 
-          {/* Docs */}
+          {/* Solutions */}
           <Route path="/solutions" element={<Solutions />}></Route>
           <Route
             path="/solution/detail/:id"
             element={<SolutionDetails />}
           ></Route>
+
+          {/* Search */}
+          <Route path="/search/:text" element={<Search />}></Route>
         </Route>
       </Switch>
     </Router>

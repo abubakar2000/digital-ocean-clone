@@ -45,7 +45,11 @@ export default function Topics() {
           <div className="row">
             <div className="col-5">
               <img
-                src="https://picsum.photos/500/300?random=2"
+                src={
+                  item?.image
+                    ? apiip + item.image
+                    : "https://picsum.photos/500/300?random=2"
+                }
                 alt=""
                 style={{ width: "90%", height: "150px", borderRadius: "2%" }}
               />

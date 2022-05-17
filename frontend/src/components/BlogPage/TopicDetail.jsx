@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { apiip } from "../../serverConfig";
-import './TopicDetails.module.css'
+import "./TopicDetails.module.css";
 
 export default function TopicDetail() {
   const { id } = useParams();
@@ -26,7 +26,7 @@ export default function TopicDetail() {
   }, []);
 
   return (
-    <div className="row" style={{ margin: "100px" }}>
+    <div className="row topicdetails-blog" style={{ margin: "100px" }}>
       <div className="col-lg-3 d-none d-md-block d-lg-block d-xl-block">
         <h4 className="text-dark">Topics</h4>
         {blogs.map((item) => (
@@ -41,7 +41,6 @@ export default function TopicDetail() {
           </div>
         ))}
       </div>
-
 
       <div className="col-lg-8">
         <div className="row">

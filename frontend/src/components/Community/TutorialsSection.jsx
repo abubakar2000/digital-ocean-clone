@@ -25,7 +25,7 @@ export default function TutorialsSection() {
   };
 
   return (
-    <div className="row">
+    <div className="row mt-5 py-5" style={{ backgroundColor: "#E5E8ED" }}>
       <div className="pricing6 container">
         <div className="container">
           <h1>Tutorials</h1>
@@ -33,7 +33,7 @@ export default function TutorialsSection() {
             {articles.map((art) => (
               <Link
                 key={art.title}
-                to={"/tutorials"}
+                to={"/community/tutorials/" + art.id}
                 className="text-dark text-decoration-none col-md-4 rounded-3 p-1"
               >
                 <div style={{ fontSize: "11px" }}>
@@ -62,7 +62,7 @@ export default function TutorialsSection() {
               </Link>
             ))}
           </div>
-          <div className="row my-5">
+          <div className="row">
             <Link to={"/tutorials"}>
               <h5>Looking for more? Check out all of our tutorials here.</h5>
             </Link>
