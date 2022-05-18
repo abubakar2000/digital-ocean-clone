@@ -22,7 +22,7 @@ export default function Login() {
       .post(`${apiip}/api/accounts/auth/login/`, body)
       .then((res) => {
         if (res.status === 200) {
-          console.log("Res -> ", res);
+          localStorage.setItem("loginKey", res.data.key);
           navigate("/");
         }
       })

@@ -58,7 +58,7 @@ export default function Topics() {
               <div className="row">
                 <h5>
                   <a
-                    href={item.id}
+                    href={"/postdetails/" + item.id}
                     style={{ textDecoration: "none", color: "black" }}
                   >
                     {item?.title}

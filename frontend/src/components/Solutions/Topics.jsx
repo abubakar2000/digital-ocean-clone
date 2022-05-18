@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { apiip } from "../../serverConfig";
+import Navbar from "../Navbar";
 export default function Topics() {
   const [solutions, setSolutions] = useState([]);
   useEffect(() => {
@@ -24,11 +25,12 @@ export default function Topics() {
   }, [axios]);
 
   return (
-    <div className="topics">
-      <h1>Welcome to the Solutions</h1>
+    <div className="topics container pt-5" style={{ marginTop: "60pt" }}>
+      <Navbar />
+      <h1 className="mt-5">Welcome to the Solutions</h1>
       <hr />
 
-      <div className="container-fluied px-3 py-3">
+      <div className="container px-3 py-3">
         <div className="row" style={{ justifyContent: "space-between" }}>
           {solutions.map((item) => (
             <div className="card p-1 rounded col-sm-4 mb-3">

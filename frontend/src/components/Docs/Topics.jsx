@@ -25,8 +25,8 @@ export default function Topics() {
   }, [axios]);
 
   return (
-    <div className="topics container">
-      <h1 style={{marginTop:"3%",marginBottom:'3%'}}>Welcome to Docs</h1>
+    <div className="topics container" style={{ marginTop: "90pt" }}>
+      <h1 style={{ marginTop: "3%", marginBottom: "3%" }}>Welcome to Docs</h1>
       {/* <hr /> */}
 
       <div className="container-fluied px-3 py-3">

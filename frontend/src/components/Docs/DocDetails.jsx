@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { apiip } from "../../serverConfig";
 import { useParams } from "react-router-dom";
+import Navbar from "../Navbar";
 
 export default function DocDetails() {
   const { id } = useParams();
@@ -27,8 +28,9 @@ export default function DocDetails() {
   }, [axios]);
 
   return (
-    <div className="topics container">
-      <div style={{fontSize:'4vh',padding:'2%'}}>Welcome to Docs</div>
+    <div className="topics container" style={{ marginTop: "60pt" }}>
+      <Navbar />
+      <div style={{ fontSize: "4vh", padding: "2%" }}>Welcome to Docs</div>
       {/* <hr /> */}
 
       <div className="container-fluied mx-3 px-3 py-3">

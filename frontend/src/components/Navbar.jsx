@@ -14,21 +14,28 @@ export default class Navbar extends Component {
       isCommunityOpen: false,
       isServiceOpen: false,
       isAboutOpen: false,
+      isSolutionsOpen: false,
       isScrollingUp: false,
       isScrollingDown: true,
       scrollingPosition: 0,
+      LoginKey: "",
+      password: "",
+      confirm_password: "",
       // abm
       products: [],
       articles: [],
+
       isLoggedIn: localStorage.getItem("isLoggedIn"),
     };
     console.log(localStorage.getItem("isLoggedIn"));
   }
 
   componentDidMount() {
+    this.setState({ LoginKey: localStorage.getItem("loginKey") });
     window.addEventListener("scroll", this.listenToScroll);
     this.loadProductsData();
     this.loadtutorialsData();
+    this.loadSolutions();
   }
 
   loadProductsData = () => {
@@ -55,6 +62,54 @@ export default class Navbar extends Component {
       });
   };
 
+  loadSolutions = () => {
+    axios
+      .get(`${apiip}/solution/api/solutions/`)
+      .then((res) => {
+        this.setState({ solutions: res.data.data });
+      })
+      .catch((err) => {
+        alert("Cannot load solutions");
+      });
+  };
+
+  changePassword = () => {
+    if (this.state.password !== this.state.confirm_password) {
+      alert("Passwords does not match!");
+    } else if (
+      this.state.password === "" ||
+      this.state.confirm_password === ""
+    ) {
+      alert("Input data!");
+    } else {
+      // const headers = {
+      //   authorization: "efa5bf36fa33a3d711aa83cafba63bc35059cf56",
+      // };
+      console.log(
+        this.state.password,
+        this.state.confirm_password,
+        this.state.LoginKey
+      );
+      axios
+        .post(
+          `${apiip}/api/accounts/auth/password/change/`,
+          {
+            new_password1: this.state.password,
+            new_password2: this.state.confirm_password,
+          }
+          // {
+          //   headers,
+          // }
+        )
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          alert("Error!");
+        });
+    }
+  };
+
   listenToScroll = () => {
     const scrolled = window.scrollY;
     if (scrolled > 100) {
@@ -75,14 +130,77 @@ export default class Navbar extends Component {
   render() {
     return (
       <div style={{ display: this.props.display }}>
+        {/*Modals*/}
+        <div
+          class="modal fade"
+          id="exampleModalCenter"
+          tabindex="-1"
+          role="dialog"
+          aria-labelledby="exampleModalCenterTitle"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">
+                  Change Password:
+                </h5>
+                <button
+                  type="button"
+                  class="close"
+                  data-dismiss="modal"
+                  aria-label="Close"
+                >
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Password</label>
+                  <input
+                    type="password"
+                    class="form-control"
+                    placeholder="Password"
+                    value={this.state.password}
+                    onChange={(e) =>
+                      this.setState({ password: e.target.value })
+                    }
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Confirm Password</label>
+                  <input
+                    type="password"
+                    class="form-control"
+                    placeholder="Confirm Password"
+                    value={this.state.confirm_password}
+                    onChange={(e) =>
+                      this.setState({ confirm_password: e.target.value })
+                    }
+                  />
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  onClick={() => this.changePassword()}
+                >
+                  Reset Password
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <header
           className="header"
           style={{
             backgroundColor: this.state.isScrollingUp
               ? "white"
               : "rgb(249, 250, 254)",
-            position: this.state.isScrollingUp ? "fixed" : "relative",
-            top: 0,
+            position: this.state.isScrollingUp ? "fixed" : "absolute",
+            top: this.state.isScrollingUp ? 0 : 60,
           }}
         >
           <div className="container">
@@ -115,7 +233,7 @@ export default class Navbar extends Component {
                           isProductsOpen: !this.state.isProductsOpen,
                           isServiceOpen: false,
                           isCommunityOpen: false,
-                          isAboutOpen: false,
+                          isSolutionsOpen: false,
                         });
                       }}
                     >
@@ -135,7 +253,7 @@ export default class Navbar extends Component {
                           isProductsOpen: false,
                           isServiceOpen: false,
                           isCommunityOpen: !this.state.isCommunityOpen,
-                          isAboutOpen: false,
+                          isSolutionsOpen: false,
                         });
                       }}
                     >
@@ -143,6 +261,27 @@ export default class Navbar extends Component {
                       <FontAwesomeIcon
                         icon={
                           this.state.isCommunityOpen ? faAngleUp : faAngleDown
+                        }
+                      />{" "}
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      style={{ background: "none", border: "none" }}
+                      onClick={() => {
+                        this.setState({
+                          isProductsOpen: false,
+                          isServiceOpen: false,
+                          isCommunityOpen: false,
+                          isAboutOpen: false,
+                          isSolutionsOpen: !this.state.isSolutionsOpen,
+                        });
+                      }}
+                    >
+                      Solutions{" "}
+                      <FontAwesomeIcon
+                        icon={
+                          this.state.isSolutionsOpen ? faAngleUp : faAngleDown
                         }
                       />{" "}
                     </button>
@@ -184,27 +323,43 @@ export default class Navbar extends Component {
                   )}
                   {this.state.isLoggedIn === "true" && (
                     <li>
-                      <div>
-                        <div
-                          style={{
-                            backgroundColor: "red",
-                            paddingTop: "5pt",
-                            paddingBottom: "5pt",
-                            paddingLeft: "10pt",
-                            paddingRight: "10pt",
-                            color: "white",
-                            cursor: "pointer",
-                            borderRadius: "3pt",
-                          }}
+                      <img
+                        src="https://picsum.photos/200"
+                        alt="Avatar"
+                        style={{
+                          borderRadius: "50pt",
+                          width: "30pt",
+                          height: "30pt",
+                        }}
+                        class="btn btn-secondary dropdown-toggle"
+                        type="button"
+                        id="dropdownMenuButton"
+                        data-toggle="dropdown"
+                      />
+                      <div
+                        class="dropdown-menu"
+                        aria-labelledby="dropdownMenuButton"
+                      >
+                        <p
+                          class="dropdown-item text-primary m-0"
+                          data-toggle="modal"
+                          data-target="#exampleModalCenter"
+                          style={{ cursor: "pointer", fontWeight: "bold" }}
+                        >
+                          Change Password
+                        </p>
+                        <p
+                          class="dropdown-item text-primary m-0"
+                          style={{ cursor: "pointer", fontWeight: "bold" }}
                           onClick={() => {
                             localStorage.removeItem("isLoggedIn");
                             this.setState({ isLoggedIn: "false" }, () => {
-                              window.location.href = "/login";
+                              window.location.href = "/";
                             });
                           }}
                         >
                           Logout
-                        </div>
+                        </p>
                       </div>
                     </li>
                   )}
@@ -213,7 +368,9 @@ export default class Navbar extends Component {
             </div>
             <div
               className="dropdown-content bg-light p-2"
-              style={{ display: this.state.isProductsOpen ? "block" : "none" }}
+              style={{
+                display: this.state.isProductsOpen ? "block" : "none",
+              }}
             >
               <div className="row p-4">
                 <div className="col-md-4 bg-light left-side overflow-auto">
@@ -253,6 +410,40 @@ export default class Navbar extends Component {
                 </div>
               </div>
             </div>
+
+            {/*isSolutionsOpen*/}
+            <div
+              className="dropdown-content bg-light p-2"
+              style={{
+                display: this.state.isSolutionsOpen ? "block" : "none",
+              }}
+            >
+              <div className="row py-4">
+                <h5>Our Solutions</h5>
+                <div className="col-md-12 m-3 mt-4">
+                  <div className="row">
+                    {this.state.solutions?.map((sl) => (
+                      <div className="col-md-4">
+                        <div className="card custom-card text-dark">
+                          <Link
+                            // key={sl.title}
+                            className="text-decoration-none text-dark"
+                            to={"/solution/detail/" + sl.id}
+                          >
+                            <div>
+                              <h5>{sl.title}</h5>
+                              {/* <p>{sl.description}</p> */}
+                            </div>
+                          </Link>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+            {/*isSolutionsOpen end*/}
+
             <div
               className="dropdown-content bg-light p-2"
               style={{ display: this.state.isCommunityOpen ? "block" : "none" }}
@@ -274,7 +465,7 @@ export default class Navbar extends Component {
                   <div className="card custom-card text-dark">
                     <Link
                       className="text-decoration-none text-dark"
-                      to="/community"
+                      to="/tutorials"
                     >
                       <div>
                         <h5>Tutorials</h5>
@@ -285,7 +476,7 @@ export default class Navbar extends Component {
                   <div className="card custom-card text-dark">
                     <Link
                       className="text-decoration-none text-dark"
-                      to="/community"
+                      to="/community/questions"
                     >
                       <div>
                         <h5>Questions and Answers</h5>

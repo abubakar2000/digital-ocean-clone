@@ -90,7 +90,7 @@ export default function ProductPage() {
   };
 
   return (
-    <div className="container-fluid">
+    <div className="container-fluid" style={{ marginTop: "60pt" }}>
       {/*Header*/}
       <div
         className="row front-bg text-light"

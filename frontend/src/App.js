@@ -41,9 +41,9 @@ function App() {
         <Route path="/register" element={<Register />}></Route>
         <Route path="/login" element={<Login />}></Route>
         <Route path="/resetpassword" element={<ResetPassword />}></Route>
+        <Route path="/" element={<HomePage />}></Route>
 
         <Route element={<ProtectedRoutes />}>
-          <Route path="/" element={<HomePage />}></Route>
           <Route path="/:page" element={<Layout />}></Route>
           <Route path="/postdetails/:id" element={<TopicDetail />}></Route>
           {/* COMMUNITY */}

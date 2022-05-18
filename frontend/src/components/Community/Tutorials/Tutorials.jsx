@@ -65,13 +65,6 @@ export default function Tutorials() {
         <div className="row">
           {articles.map((item) => (
             <div className="col-9 p-1 my-3" style={{ margin: "0 auto" }}>
-              <div className="d-flex align-items-center">
-                <img
-                  src={apiip + item.image}
-                  style={{ width: "100%", height: "300pt" }}
-                  alt=""
-                />
-              </div>
               <h6 className="text-primary my-2">{item.category[0].title}</h6>
 
               <Link

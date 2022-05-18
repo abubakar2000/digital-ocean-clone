@@ -5,6 +5,7 @@ import axios from "axios";
 import { apiip } from "../../serverConfig";
 import { useParams } from "react-router-dom";
 import ReactPlayer from "react-player";
+import Navbar from "../Navbar";
 
 export default function DocDetails() {
   const { id } = useParams();
@@ -28,8 +29,9 @@ export default function DocDetails() {
   }, [axios]);
 
   return (
-    <div className="topics">
-      <h1>{solution.title}</h1>
+    <div className="topics" style={{ marginTop: "60pt" }}>
+      <Navbar />
+      <h1 className="mt-5">{solution.title}</h1>
       <hr />
 
       <div className="container-fluied mx-3 px-3 py-3">
