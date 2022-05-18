@@ -32,6 +32,7 @@ export default function HomePage() {
                 backgroundRepeat: "no-repeat",
                 backgroundSize: "cover",
                 marginTop: "60pt",
+                width: "100%",
               }}
             >
               <div
