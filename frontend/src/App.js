@@ -12,6 +12,7 @@ import BlogPage from "./pages/BlogPage";
 import HomePage from "./pages/HomePage";
 
 import TopBanner from "./components/topbanner";
+import Footer from "./components/Footer/Footer";
 import Navbar from "./components/Navbar";
 import TopicDetail from "./components/BlogPage/TopicDetail";
 import ProductPage from "./pages/ProductPage";
@@ -53,7 +54,7 @@ function App() {
             element={<TutorialsDetail />}
           ></Route>
           <Route
-            path="/community/questions/:topic"
+            path="/community/questions/:id"
             element={<QuestionsDetail />}
           ></Route>
           {/* Docs */}
@@ -71,6 +72,7 @@ function App() {
           <Route path="/search/:text" element={<Search />}></Route>
         </Route>
       </Switch>
+      <Footer></Footer>
     </Router>
   );
 }

@@ -4,13 +4,19 @@ import WhyUs from "../components/HomePage/WhyUs";
 import Pricing from "../components/HomePage/Pricing";
 import Navbar from "../components/Navbar";
 import bg from "../img/bg.jpg";
-import Footer from "../components/Footer/Footer";
+import { Link } from "react-router-dom";
+import GoogleLogin from "react-google-login";
+import { google_clientId } from "../serverConfig";
 
 export default function HomePage() {
   const [isLoggedIn, setIsLoggedIn] = useState("");
   useEffect(() => {
     setIsLoggedIn(localStorage.getItem("isLoggedIn"));
   }, []);
+
+  const responseGoogle = (response) => {
+    console.log(response);
+  };
 
   return (
     <>
@@ -79,17 +85,20 @@ export default function HomePage() {
                   margin: "0 auto",
                 }}
               >
-                <button className="btn btn-primary rounded-1 btn-md text-ligt py-2 m-1">
-                  Signup with email
-                </button>
-                <button className="btn btn-light rounded-3 btn-md text-ligt py-2 m-1">
-                  <img
-                    src="https://www-static.cdn.prismic.io/www-static/7b66f955-63dd-41f5-a403-e6727b24d4ea_google-logo.svg"
-                    alt=""
-                    width="20"
-                  />{" "}
-                  Sign In with Gmail
-                </button>
+                <Link to={"/login"}>
+                  <button className="btn btn-primary rounded-1 btn-md text-ligt py-2 m-1">
+                    Signup with email
+                  </button>
+                </Link>
+
+                <GoogleLogin
+                  clientId={google_clientId}
+                  buttonText="Sign In with Gmail"
+                  onSuccess={responseGoogle}
+                  onFailure={responseGoogle}
+                  cookiePolicy={"single_host_origin"}
+                />
+
                 <button className="btn btn-light rounded-3 btn-md text-ligt py-2 m-1">
                   <img
                     src="https://www-static.cdn.prismic.io/www-static/0a3e37e0-1706-41d5-98d1-854585205a5e_github-logo.svg"
@@ -114,7 +123,6 @@ export default function HomePage() {
         <FrontBanner></FrontBanner>
         <WhyUs></WhyUs>
         <Pricing></Pricing>
-        <Footer></Footer>
       </div>
     </>
   );

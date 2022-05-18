@@ -5,6 +5,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleDown, faAngleUp } from "@fortawesome/fontawesome-free-solid";
 import axios from "axios";
 import { apiip } from "../serverConfig";
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
 
 export default class Navbar extends Component {
   constructor(props) {
@@ -24,6 +26,8 @@ export default class Navbar extends Component {
       // abm
       products: [],
       articles: [],
+
+      show: false,
 
       isLoggedIn: localStorage.getItem("isLoggedIn"),
     };
@@ -82,27 +86,26 @@ export default class Navbar extends Component {
     ) {
       alert("Input data!");
     } else {
-      // const headers = {
-      //   authorization: "efa5bf36fa33a3d711aa83cafba63bc35059cf56",
-      // };
-      console.log(
-        this.state.password,
-        this.state.confirm_password,
-        this.state.LoginKey
-      );
+      const headers = {
+        authorization: "Token " + this.state.LoginKey,
+      };
       axios
         .post(
           `${apiip}/api/accounts/auth/password/change/`,
           {
             new_password1: this.state.password,
             new_password2: this.state.confirm_password,
+          },
+          {
+            headers,
           }
-          // {
-          //   headers,
-          // }
         )
         .then((res) => {
           console.log(res);
+          if (res.status === 200) {
+            this.handleClose();
+            alert(res.data.detail);
+          }
         })
         .catch((err) => {
           alert("Error!");
@@ -126,6 +129,9 @@ export default class Navbar extends Component {
       });
     }
   };
+
+  handleClose = () => this.setState({ show: false });
+  handleShow = () => this.setState({ show: true });
 
   render() {
     return (
@@ -192,6 +198,47 @@ export default class Navbar extends Component {
             </div>
           </div>
         </div>
+
+        <Modal
+          show={this.state.show}
+          onHide={this.handleClose}
+          backdrop="static"
+          keyboard={false}
+          centered
+        >
+          <Modal.Header closeButton>
+            <Modal.Title>Change Password:</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <div class="form-group">
+              <label for="exampleInputEmail1">Password</label>
+              <input
+                type="password"
+                class="form-control"
+                placeholder="Password"
+                value={this.state.password}
+                onChange={(e) => this.setState({ password: e.target.value })}
+              />
+            </div>
+            <div class="form-group">
+              <label for="exampleInputEmail1">Confirm Password</label>
+              <input
+                type="password"
+                class="form-control"
+                placeholder="Confirm Password"
+                value={this.state.confirm_password}
+                onChange={(e) =>
+                  this.setState({ confirm_password: e.target.value })
+                }
+              />
+            </div>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button onClick={() => this.changePassword()}>
+              Reset Password
+            </Button>
+          </Modal.Footer>
+        </Modal>
 
         <header
           className="header"
@@ -342,8 +389,7 @@ export default class Navbar extends Component {
                       >
                         <p
                           class="dropdown-item text-primary m-0"
-                          data-toggle="modal"
-                          data-target="#exampleModalCenter"
+                          onClick={this.handleShow}
                           style={{ cursor: "pointer", fontWeight: "bold" }}
                         >
                           Change Password

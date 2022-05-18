@@ -58,7 +58,7 @@ export default function Tutorials() {
       <div className="container">
         <div className="row">
           <div className="col-9 p-1 my-2" style={{ margin: "0 auto" }}>
-            <h6>3,982 Tutorials</h6>
+            <h6>{articles?.length} Tutorials</h6>
           </div>
         </div>
 
