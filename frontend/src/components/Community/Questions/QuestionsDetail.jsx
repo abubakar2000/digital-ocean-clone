@@ -4,6 +4,7 @@ import { apiip } from "../../../serverConfig";
 import { Link } from "react-router-dom";
 import Navbar from "../Navbar";
 import { useParams } from "react-router-dom";
+import "./questions.css";
 
 export default function QuestionsDetail() {
   const [questions, setQuestions] = useState([]);
@@ -84,7 +85,10 @@ export default function QuestionsDetail() {
   };
 
   return (
-    <div className="container-fluid" style={{ backgroundColor: "white" }}>
+    <div
+      className="questions container-fluid"
+      style={{ backgroundColor: "white" }}
+    >
       <Navbar />
       <div className="container">
         <div className="row" style={{ marginTop: "20pt" }}>
@@ -163,6 +167,46 @@ export default function QuestionsDetail() {
                         Submit
                       </button>
                     </div>
+                  </div>
+                </div>
+
+                <hr className="my-5" />
+
+                <div className="row  ">
+                  <div className="col-md-12">
+                    <div className="headings d-flex justify-content-between align-items-center mb-3">
+                      <h4>Comments({item.comments?.length})</h4>
+                    </div>
+
+                    {item.comments?.map((c) => (
+                      <div className="card p-3 py-4 mb-3">
+                        <div className="row">
+                          <div className="col-10">
+                            <img
+                              src={
+                                item.image
+                                  ? item.image
+                                  : "https://i.imgur.com/hczKIze.jpg"
+                              }
+                              width="30"
+                              class="user-img rounded-circle mr-2 "
+                              alt="user"
+                            />
+                            <span>
+                              <small className="font-weight-bold text-primary">
+                                {c.user.username}
+                              </small>{" "}
+                              <small className="">{c.comment}</small>
+                            </span>
+                          </div>
+                          <div className="col-2">
+                            <div className="d-flex justify-content-center align-items-center">
+                              <small>2 days ago</small>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
                   </div>
                 </div>
               </div>
