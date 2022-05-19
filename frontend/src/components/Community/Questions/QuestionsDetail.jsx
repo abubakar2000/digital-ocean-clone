@@ -4,6 +4,7 @@ import { apiip } from "../../../serverConfig";
 import { Link } from "react-router-dom";
 import Navbar from "../Navbar";
 import { useParams } from "react-router-dom";
+import "./questions.css";
 
 export default function QuestionsDetail() {
   const [questions, setQuestions] = useState([]);
