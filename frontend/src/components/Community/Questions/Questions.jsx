@@ -4,6 +4,7 @@ import { apiip } from "../../../serverConfig";
 import { Link } from "react-router-dom";
 import { faSearch } from "@fortawesome/fontawesome-free-solid";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Navbar from "../Navbar";
 
 export default function Questions() {
   const [questions, setQuestions] = useState([]);
@@ -28,6 +29,7 @@ export default function Questions() {
 
   return (
     <div className="container-fluid" style={{ backgroundColor: "white" }}>
+      <Navbar />
       <div className="row">
         <div
           className="col-12 text-light text-center py-5"
@@ -49,12 +51,13 @@ export default function Questions() {
         </div>
         <div className="row">
           {questions.map((item) => (
-            <div className="col-9 p-1 my-2" style={{ margin: "0 auto" }}>
-              <h6 className="text-primary">{item.category.title}</h6>
-              <Link
-                to={"/community/questions/" + item.id}
-                className="row my-4 text-dark text-decoration-none"
-              >
+            <div
+              className="card col-9 p-1 my-2 rounded shadow-sm"
+              style={{ margin: "0 auto" }}
+            >
+              <div className="card-body  ">
+                <h6 className="text-primary">{item.category.title}</h6>
+
                 <div className="col-12">
                   <h2>{item.title}</h2>
                   <p>{item.description}</p>
@@ -62,14 +65,19 @@ export default function Questions() {
                     {item.answers?.length} answers •{" "}
                     {item.posted_date.substr(0, item.posted_date.indexOf("T"))}{" "}
                     • {item.posted_by?.title} &nbsp;&nbsp;{" "}
-                    <Link to={"/community/tutorials/?q=apache"}>
-                      <span className="bg-primary text-decoration-none p-2 rounded-3 text-light">
-                        Apache
-                      </span>
+                    <Link to={"/community/questions/" + item.id}>
+                      <button className="btn btn-success text-decoration-none p-2 rounded-3 text-light ">
+                        Answer
+                      </button>
+                    </Link>
+                    <Link to={"/community/questions/" + item.id}>
+                      <button className="btn btn-primary text-decoration-none p-2 rounded-3 text-light ml-2">
+                        Comment
+                      </button>
                     </Link>
                   </p>
                 </div>
-              </Link>
+              </div>
             </div>
           ))}
         </div>

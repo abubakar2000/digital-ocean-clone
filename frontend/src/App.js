@@ -57,6 +57,8 @@ function App() {
             path="/community/questions/:id"
             element={<QuestionsDetail />}
           ></Route>
+
+          <Route path="/tutorials" element={<Tutorials />}></Route>
           {/* Docs */}
           <Route path="/docs/:page" element={<CommunityPages />}></Route>
           <Route path="/docs/detail/:id" element={<DocDetails />}></Route>

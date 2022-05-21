@@ -2,6 +2,14 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 import axios from "axios";
 import { apiip } from "../serverConfig";
+import firebase_auth from "../firebase-config";
+import {
+  signInWithPopup,
+  GoogleAuthProvider,
+  GithubAuthProvider,
+  FacebookAuthProvider,
+} from "firebase/auth";
+import { FaFacebookF } from "react-icons/fa";
 
 export default function Login() {
   const [username, setUsername] = useState("");
@@ -44,6 +52,98 @@ export default function Login() {
   useEffect(() => {
     document.title = "Login";
   }, []);
+
+  const LoginGoogle = (GoogleAccessToken, GoogleUid) => {
+    axios
+      .post(`${apiip}/api/accounts/google/`, {
+        access_token: GoogleAccessToken,
+        code: GoogleUid,
+      })
+      .then((res) => {
+        console.log(res);
+        if (res.status === 200) {
+          navigate("/");
+        }
+      })
+      .catch((err) => {
+        console.log("error ", err);
+      });
+  };
+
+  const signInWithGoogle = () => {
+    const provider = new GoogleAuthProvider();
+    signInWithPopup(firebase_auth, provider)
+      .then((result) => {
+        const user = result.user;
+        LoginGoogle(user.accessToken, user.uid);
+      })
+      .catch((error) => {
+        if (error.code === "auth/account-exists-with-different-credential")
+          alert("Account exists with same email!");
+      });
+  };
+
+  const LoginGithub = (GoogleAccessToken, GoogleUid) => {
+    axios
+      .post(`${apiip}/api/accounts/github/`, {
+        access_token: GoogleAccessToken,
+        code: GoogleUid,
+      })
+      .then((res) => {
+        console.log(res);
+        if (res.status === 200) {
+          navigate("/");
+        }
+      })
+      .catch((err) => {
+        console.log("error ", err);
+      });
+  };
+
+  const signInWithGithub = () => {
+    const provider = new GithubAuthProvider();
+    signInWithPopup(firebase_auth, provider)
+      .then((result) => {
+        const user = result.user;
+        LoginGithub(user.accessToken, user.uid);
+      })
+      .catch((error) => {
+        console.log(error);
+        if (error.code === "auth/account-exists-with-different-credential")
+          alert("Account exists with same email!");
+      });
+  };
+
+  const LoginFacebook = (GoogleAccessToken, GoogleUid) => {
+    axios
+      .post(`${apiip}/api/accounts/facebook/`, {
+        access_token: GoogleAccessToken,
+        code: GoogleUid,
+      })
+      .then((res) => {
+        console.log(res);
+        if (res.status === 200) {
+          navigate("/");
+        }
+      })
+      .catch((err) => {
+        console.log("error ", err);
+      });
+  };
+
+  const signInWithFacebook = () => {
+    const provider = new FacebookAuthProvider();
+    signInWithPopup(firebase_auth, provider)
+      .then((result) => {
+        const user = result.user;
+        LoginFacebook(user.accessToken, user.uid);
+      })
+      .catch((error) => {
+        console.log(error);
+        if (error.code === "auth/account-exists-with-different-credential")
+          alert("Account exists with same email!");
+      });
+  };
 
   return (
     <div
@@ -101,12 +201,21 @@ export default function Login() {
             <button
               type="button"
               className="btn btn-outline-primary btn-lg mt-3"
+              onClick={() => signInWithFacebook()}
+            >
+              Sign In With Facebook
+            </button>
+            <button
+              type="button"
+              className="btn btn-outline-primary btn-lg mt-3"
+              onClick={() => signInWithGoogle()}
             >
               Sign In With Google
             </button>
             <button
               type="button"
               className="btn btn-outline-primary btn-lg mt-3"
+              onClick={() => signInWithGithub()}
             >
               Sign In With Github
             </button>

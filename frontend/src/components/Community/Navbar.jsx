@@ -63,7 +63,7 @@ export default class Navbar extends Component {
                   <ul>
                     <li>
                       <Link
-                        to={"/community/tutorials"}
+                        to={"/tutorials"}
                         style={{ background: "none", border: "none" }}
                         onClick={() => {}}
                       >

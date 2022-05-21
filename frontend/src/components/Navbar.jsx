@@ -530,53 +530,12 @@ export default class Navbar extends Component {
                       </div>
                     </Link>
                   </div>
-                  <div className="card custom-card text-dark">
-                    <Link
-                      className="text-decoration-none text-dark"
-                      to="/community"
-                    >
-                      <div>
-                        <h5>Tools</h5>
-                        <p>Community-built integrations</p>
-                      </div>
-                    </Link>
-                  </div>
                 </div>
                 <div className="col-md-7 m-3 mt-5">
                   <div className="row">
-                    <div className="col-md-4">
-                      <h6 className="bold">Get Involved</h6>
-                      <ul>
-                        <li>
-                          <Link
-                            to={"/community"}
-                            className="text-dark text-decoration-none"
-                          >
-                            Write for Donations
-                          </Link>
-                        </li>
+                    <div className="col-md-10">
+                      <h6 className="bold mb-3">Featured Articles</h6>
 
-                        <li>
-                          <Link
-                            to={"/community"}
-                            className="text-dark text-decoration-none"
-                          >
-                            Meetups
-                          </Link>
-                        </li>
-
-                        <li>
-                          <Link
-                            to={"/community"}
-                            className="text-dark text-decoration-none"
-                          >
-                            Hatch Startup Program
-                          </Link>
-                        </li>
-                      </ul>
-                    </div>
-                    <div className="col-md-8">
-                      <h6 className="bold">Featured Articles</h6>
                       <ul>
                         {this.state.articles
                           .filter((art) => art.featured === true)

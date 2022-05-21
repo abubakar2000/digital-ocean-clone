@@ -17,9 +17,11 @@ export default function CommunityPage(props) {
       setShowBackground(window.innerWidth > 1100);
     });
   }, []);
+
   const [ShowBackground, setShowBackground] = useState(
     window.innerWidth > 1100
   );
+
   return (
     <div
       className="container-fluid overflow-hidden"

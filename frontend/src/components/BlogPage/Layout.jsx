@@ -27,7 +27,6 @@ export default function Layout(props) {
       {page === "postdetails" ? <TopicDetail></TopicDetail> : <></>}
       {page === "product" ? <ProductPage></ProductPage> : <></>}
       {page === "docs" ? <DocsPage></DocsPage> : <></>}
-      {page === "tutorials" ? <Tutorials></Tutorials> : <></>}
       {page === "community" ? <CommunityPage></CommunityPage> : <></>}
       {page === "login" ? <Login></Login> : <></>}
     </>

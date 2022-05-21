@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { apiip } from "../../../serverConfig";
 import { faSearch } from "@fortawesome/fontawesome-free-solid";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Navbar from "../Navbar";
 
 export default function Tutorials() {
   const [articles, setarticles] = useState([]);
@@ -27,6 +28,7 @@ export default function Tutorials() {
   };
   return (
     <div className="container-fluid" style={{ backgroundColor: "white" }}>
+      <Navbar />
       <div className="row">
         <div
           className="col-12 text-light text-center py-5"
@@ -64,26 +66,26 @@ export default function Tutorials() {
 
         <div className="row">
           {articles.map((item) => (
-            <div className="col-9 p-1 my-3" style={{ margin: "0 auto" }}>
-              <h6 className="text-primary my-2">{item.category[0].title}</h6>
+            <div
+              className="card col-9 p-1 my-2 rounded shadow-sm"
+              style={{ margin: "0 auto" }}
+            >
+              <div className="card-body  ">
+                <h6 className="text-primary my-2">{item.category[0].title}</h6>
 
-              <Link
-                to={"/community/tutorials/" + item.id}
-                className="row my-2 text-dark text-decoration-none"
-              >
                 <div className="col-12">
                   <h2>{item.title}</h2>
                   <p>{item.description}</p>
                   <p>
                     3 days ago • By Justin Ellingwood, Savic &nbsp;&nbsp;{" "}
-                    <Link to={"/community/tutorials/?q=apache"}>
-                      <span className="bg-primary text-decoration-none p-2 rounded-3 text-light">
-                        Apache
-                      </span>
+                    <Link to={"/community/tutorials/" + item.id}>
+                      <button className="btn btn-primary text-decoration-none p-2 rounded-3 text-light ">
+                        Read more
+                      </button>
                     </Link>
                   </p>
                 </div>
-              </Link>
+              </div>
             </div>
           ))}
         </div>
