@@ -1,4 +1,4 @@
-const apiip = `http://40.86.23.218`;
+const apiip = `http://virtualdocker.pythonanywhere.com`;
 export { apiip };
 
 const google_clientId =

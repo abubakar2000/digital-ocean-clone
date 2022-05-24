@@ -6,6 +6,7 @@ import { apiip } from "../../serverConfig";
 import { useParams } from "react-router-dom";
 import ReactPlayer from "react-player";
 import Navbar from "../Navbar";
+import "./solutions.css";
 
 export default function DocDetails() {
   const { id } = useParams();
@@ -29,19 +30,36 @@ export default function DocDetails() {
   }, [axios]);
 
   return (
-    <div className="topics" style={{ marginTop: "60pt" }}>
+    <div className="topics text-center" style={{ marginTop: "60pt" }}>
       <Navbar />
-      <h1 className="mt-5">{solution.title}</h1>
-      <hr />
 
-      <div className="container-fluied mx-3 px-3 py-3">
+      <div className="solution-header">
+        <div className="container">
+          <h1 className="text-center text-white">
+            Simple and reliable cloud website hosting
+          </h1>
+          <h4 className="text-center text-white">
+            DigitalOcean offers a simple and reliable cloud hosting solution
+            that enables developers and businesses to get their website or
+            application up and running quickly. Spin up a site quickly with our
+            1-click apps for Wordpress, Ghost, and other content management
+            systems, or get three free static sites using DigitalOcean App
+            Platform.
+          </h4>
+        </div>
+      </div>
+
+      <div
+        className="container py-5"
+        style={{ display: "flex", alignItems: "center" }}
+      >
         <div className="row" style={{ justifyContent: "space-between" }}>
           {solution.map((item) => (
             <div>
-              <h2 className="mb-4">{item.title}</h2>
+              <h2 className="mb-4 text-center ">{item.title}</h2>
 
               <div className="mb-5">
-                <h4>{item?.section_one?.title}</h4>
+                <h4 className="text-center mb-4">{item?.section_one?.title}</h4>
                 <div className="row">
                   {item?.section_one?.cards?.map((s1) => (
                     <div className="col-md-3">
@@ -63,33 +81,28 @@ export default function DocDetails() {
                 </div>
               </div>
 
-              <div className="mb-5">
-                <h4>
-                  {item.section_two.title
-                    ? item.section_two.title
-                    : "Section Two:"}
-                </h4>
-                <h6>
-                  {item.section_two.description
-                    ? item.section_two.description
-                    : "Section Two description:"}
-                </h6>
+              <div className="my-5">
+                <h4>{item.section_two.title}</h4>
+                <h6 className="mb-5">{item.section_two.description}</h6>
 
                 {item.section_two?.video_url && (
-                  <div className="my-3">
+                  <div
+                    className="my-3 d-flex"
+                    style={{ justifyContent: "center" }}
+                  >
                     <ReactPlayer url={item.section_two.video_url} />
                   </div>
                 )}
               </div>
 
-              <div className="mb-5">
+              <div className="my-5">
                 {item.section_three && (
                   <div>
                     <h4>{item.section_three.title}</h4>
                     <div className="row mt-3">
                       {item.section_three.images.map((img) => (
                         <div className="col-md-4">
-                          <img src={apiip + img.image} alt="" />
+                          <img src={apiip + img.image} width={"100%"} alt="" />
                         </div>
                       ))}
                     </div>
@@ -101,10 +114,10 @@ export default function DocDetails() {
                 {item.section_four && (
                   <div>
                     <h4>{item.section_four.title}</h4>
-                    <h6>{item.section_four.description}</h6>
+                    <h6 className="mb-4">{item.section_four.description}</h6>
                     <div className="row mt-3">
                       {item.section_four.docs.map((it) => (
-                        <div className="col-md-10">
+                        <div className="col-md-12">
                           {it.steps.map((steps) => (
                             <div className="mt-2">
                               <Accordion
@@ -137,7 +150,7 @@ export default function DocDetails() {
               <div className="mb-5">
                 {item.section_five && (
                   <div>
-                    <h4>{item.section_five.title}</h4>
+                    <h4 className="mb-4">{item.section_five.title}</h4>
                     <Accordion
                       defaultActiveKey="0"
                       style={{ marginBottom: "5pt" }}
