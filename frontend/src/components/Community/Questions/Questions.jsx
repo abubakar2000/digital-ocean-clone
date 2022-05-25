@@ -27,6 +27,8 @@ export default function Questions() {
       });
   };
 
+  const [SearchParam, setSearchParam] = useState("");
+
   return (
     <div className="container-fluid" style={{ backgroundColor: "white" }}>
       <Navbar />
@@ -41,6 +43,23 @@ export default function Questions() {
             section. For information about the DigitalOcean product, check out
             our Product Docs.
           </p>
+          <div
+            className="col-md-8 rounded-3"
+            style={{ margin: "0 auto", backgroundColor: "white" }}
+          >
+            <FontAwesomeIcon
+              icon={faSearch}
+              color={"rgba(0,0,0,.4)"}
+            ></FontAwesomeIcon>
+            <input
+              type="text"
+              className="p-3 rounded-3 border-0"
+              placeholder="Search Tutorials"
+              style={{ width: "92%", outline: "none" }}
+              value={SearchParam}
+              onChange={(e) => setSearchParam(e.target.value)}
+            />
+          </div>
         </div>
       </div>
       <div className="container">
@@ -50,36 +69,46 @@ export default function Questions() {
           </div>
         </div>
         <div className="row">
-          {questions.map((item) => (
-            <div
-              className="card col-9 p-1 my-2 rounded shadow-sm"
-              style={{ margin: "0 auto" }}
-            >
-              <div className="card-body  ">
-                <h6 className="text-primary">{item.category.title}</h6>
+          {questions
+            .filter((fl) =>
+              fl.title
+                .toString()
+                .toLowerCase()
+                .includes(SearchParam.toLowerCase())
+            )
+            .map((item) => (
+              <div
+                className="card col-9 p-1 my-2 rounded shadow-sm"
+                style={{ margin: "0 auto" }}
+              >
+                <div className="card-body  ">
+                  <h6 className="text-primary">{item.category.title}</h6>
 
-                <div className="col-12">
-                  <h2>{item.title}</h2>
-                  <p>{item.description}</p>
-                  <p>
-                    {item.answers?.length} answers •{" "}
-                    {item.posted_date.substr(0, item.posted_date.indexOf("T"))}{" "}
-                    • {item.posted_by?.title} &nbsp;&nbsp;{" "}
-                    <Link to={"/community/questions/" + item.id}>
-                      <button className="btn btn-success text-decoration-none p-2 rounded-3 text-light ">
-                        Answer
-                      </button>
-                    </Link>
-                    <Link to={"/community/questions/" + item.id}>
-                      <button className="btn btn-primary text-decoration-none p-2 rounded-3 text-light ml-2">
-                        Comment
-                      </button>
-                    </Link>
-                  </p>
+                  <div className="col-12">
+                    <h2>{item.title}</h2>
+                    <p>{item.description}</p>
+                    <p>
+                      {item.answers?.length} answers •{" "}
+                      {item.posted_date.substr(
+                        0,
+                        item.posted_date.indexOf("T")
+                      )}{" "}
+                      • {item.posted_by?.title} &nbsp;&nbsp;{" "}
+                      <Link to={"/community/questions/" + item.id}>
+                        <button className="btn btn-success text-decoration-none p-2 rounded-3 text-light ">
+                          Answer
+                        </button>
+                      </Link>
+                      <Link to={"/community/questions/" + item.id}>
+                        <button className="btn btn-primary text-decoration-none p-2 rounded-3 text-light ml-2">
+                          Comment
+                        </button>
+                      </Link>
+                    </p>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
         </div>
       </div>
     </div>

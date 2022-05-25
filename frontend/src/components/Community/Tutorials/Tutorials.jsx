@@ -26,6 +26,9 @@ export default function Tutorials() {
         alert("Cannot load community articles");
       });
   };
+
+  const [SearchParam, setSearchParam] = useState("");
+
   return (
     <div className="container-fluid" style={{ backgroundColor: "white" }}>
       <Navbar />
@@ -52,6 +55,8 @@ export default function Tutorials() {
               className="p-3 rounded-3 border-0"
               placeholder="Search Tutorials"
               style={{ width: "92%", outline: "none" }}
+              value={SearchParam}
+              onChange={(e) => setSearchParam(e.target.value)}
             />
           </div>
         </div>
@@ -65,29 +70,38 @@ export default function Tutorials() {
         </div>
 
         <div className="row">
-          {articles.map((item) => (
-            <div
-              className="card col-9 p-1 my-2 rounded shadow-sm"
-              style={{ margin: "0 auto" }}
-            >
-              <div className="card-body  ">
-                <h6 className="text-primary my-2">{item.category[0].title}</h6>
+          {articles
+            .filter((fl) =>
+              fl.title
+                .toString()
+                .toLowerCase()
+                .includes(SearchParam.toLowerCase())
+            )
+            .map((item) => (
+              <div
+                className="card col-9 p-1 my-2 rounded shadow-sm"
+                style={{ margin: "0 auto" }}
+              >
+                <div className="card-body  ">
+                  <h6 className="text-primary my-2">
+                    {item.category[0].title}
+                  </h6>
 
-                <div className="col-12">
-                  <h2>{item.title}</h2>
-                  <p>{item.description}</p>
-                  <p>
-                    3 days ago • By Justin Ellingwood, Savic &nbsp;&nbsp;{" "}
-                    <Link to={"/community/tutorials/" + item.id}>
-                      <button className="btn btn-primary text-decoration-none p-2 rounded-3 text-light ">
-                        Read more
-                      </button>
-                    </Link>
-                  </p>
+                  <div className="col-12">
+                    <h2>{item.title}</h2>
+                    <p>{item.description}</p>
+                    <p>
+                      3 days ago • By Justin Ellingwood, Savic &nbsp;&nbsp;{" "}
+                      <Link to={"/community/tutorials/" + item.id}>
+                        <button className="btn btn-primary text-decoration-none p-2 rounded-3 text-light ">
+                          Read more
+                        </button>
+                      </Link>
+                    </p>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
         </div>
       </div>
     </div>

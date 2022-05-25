@@ -52,8 +52,19 @@ export default class Navbar extends Component {
         >
           <div className="container">
             <div className="row align-items-left">
-              <div className="col-md-5">
-                <h4 style={{ lineHeight: "60px" }}>Frontend</h4>
+              <div
+                className="col-md-5"
+                style={{ display: "flex", alignItems: "center" }}
+              >
+                <div className="brand-name">
+                  <Link
+                    style={{ textDecoration: "none", color: "black" }}
+                    to={"/"}
+                  >
+                    Frontend
+                  </Link>
+                </div>
+
                 <div className="nav-toggle">
                   <span></span>
                 </div>

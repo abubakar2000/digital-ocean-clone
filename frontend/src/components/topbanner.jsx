@@ -27,7 +27,7 @@ function TopBanner(props) {
             </Link>
           </div>
           <div className="col-3">
-            <Link to={"/blog"} className="text-light">
+            <Link to={"/sales"} className="text-light">
               Sales
             </Link>
           </div>

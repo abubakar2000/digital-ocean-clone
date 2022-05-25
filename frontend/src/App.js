@@ -32,6 +32,7 @@ import DocDetails from "./components/Docs/DocDetails";
 import Solutions from "./pages/Solutions";
 import SolutionDetails from "./components/Solutions/SolutionsDetails";
 import Search from "./pages/Search";
+import Sales from "./pages/Sales";
 
 function App() {
   return (
@@ -72,6 +73,9 @@ function App() {
 
           {/* Search */}
           <Route path="/search/:text" element={<Search />}></Route>
+
+          {/* Sales */}
+          <Route path="/sales" element={<Sales />}></Route>
         </Route>
       </Switch>
       <Footer></Footer>
