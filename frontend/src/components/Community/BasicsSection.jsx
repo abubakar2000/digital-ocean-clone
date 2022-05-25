@@ -54,7 +54,10 @@ export default function Basics() {
                   </div>
                   <div className="col-1"></div>
                   <div className="col-11">
-                    <p>{art.description}</p>
+                    <p>
+                      {art.description.slice(0, 180)}{" "}
+                      {art.description.length > 0 ? " ..." : ""}
+                    </p>
                     Learn More →
                   </div>
                 </div>

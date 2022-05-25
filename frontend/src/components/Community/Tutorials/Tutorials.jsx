@@ -79,7 +79,7 @@ export default function Tutorials() {
             )
             .map((item) => (
               <div
-                className="card col-9 p-1 my-2 rounded shadow-sm"
+                className="card col-9 p-1 my-2 rounded shadow"
                 style={{ margin: "0 auto" }}
               >
                 <div className="card-body  ">
@@ -92,11 +92,13 @@ export default function Tutorials() {
                     <p>{item.description}</p>
                     <p>
                       3 days ago • By Justin Ellingwood, Savic &nbsp;&nbsp;{" "}
-                      <Link to={"/community/tutorials/" + item.id}>
-                        <button className="btn btn-primary text-decoration-none p-2 rounded-3 text-light ">
-                          Read more
-                        </button>
-                      </Link>
+                      <div className="text-right">
+                        <Link to={"/community/tutorials/" + item.id}>
+                          <button className="btn btn-primary text-decoration-none p-2 rounded-3 text-light ">
+                            Read more
+                          </button>
+                        </Link>
+                      </div>
                     </p>
                   </div>
                 </div>

@@ -185,41 +185,38 @@ export default function Search() {
                   <h1>Docs</h1>
                 </div>
                 {SearchDetails?.docs?.map((item) => (
-                  <Link
-                    to={"/docs/detail/" + item.id}
-                    className="text-dark text-decoration-none"
+                  <div
+                    className="col-9 p-4 my-3 card shadow"
+                    style={{ margin: "0 auto" }}
+                    key={item.id}
                   >
-                    <div
-                      className="col-9 p-4 my-3 card shadow"
-                      style={{ margin: "0 auto" }}
-                      key={item.id}
-                    >
-                      <div className="d-flex align-items-center">
-                        <img
-                          src={
-                            item.image
-                              ? apiip + item.image
-                              : "https://picsum.photos/200"
-                          }
-                          style={{ width: "100%", height: "300pt" }}
-                          alt=""
-                        />
-                      </div>
-                      <h6 className="text-primary my-2">
-                        {item.category?.title}
-                      </h6>
-
-                      <Link
-                        to={"/docs/detail/" + item.id}
-                        className="row my-2 text-dark text-decoration-none"
-                      >
-                        <div className="col-12">
-                          <h2>{item.title}</h2>
-                          <p>{item.description}</p>
-                        </div>
-                      </Link>
+                    <div className="d-flex align-items-center">
+                      <img
+                        src={
+                          item.image
+                            ? apiip + item.image
+                            : "https://picsum.photos/200"
+                        }
+                        style={{ width: "100%", height: "300pt" }}
+                        alt=""
+                      />
                     </div>
-                  </Link>
+                    <h6 className="text-primary my-2">
+                      {item.category?.title}
+                    </h6>
+
+                    <div className="col-12">
+                      <h2>{item.title}</h2>
+                      <p>{item.description}</p>
+                      <div className="text-right">
+                        <Link to={"/docs/detail/" + item.id}>
+                          <button className="btn btn-primary text-decoration-none p-2 rounded-3 text-light ml-2">
+                            Read more
+                          </button>
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
                 ))}
               </div>
             ) : (
@@ -235,45 +232,31 @@ export default function Search() {
                   <h1>Tutorials</h1>
                 </div>
                 {SearchDetails?.tutorials?.map((item) => (
-                  <Link
-                    to={"/community/tutorials/" + item.id}
-                    className="text-dark text-decoration-none"
+                  <div
+                    className="col-9 p-4 my-3 card shadow"
+                    style={{ margin: "0 auto" }}
+                    key={item.id}
                   >
-                    <div
-                      className="col-9 p-4 my-3 card shadow"
-                      style={{ margin: "0 auto" }}
-                      key={item.id}
-                    >
-                      <div className="d-flex align-items-center">
-                        <img
-                          src={
-                            item?.image
-                              ? apiip + item?.image
-                              : "https://picsum.photos/200"
-                          }
-                          style={{ width: "100%", height: "300pt" }}
-                          alt=""
-                        />
-                      </div>
-                      <h6 className="text-primary my-2">
-                        {item.category?.title}
-                      </h6>
+                    <h6 className="text-primary my-2">
+                      {item.category?.title}
+                    </h6>
 
-                      <Link
-                        to={"/community/tutorials/" + item.id}
-                        className="row my-2 text-dark text-decoration-none"
-                      >
-                        <div className="col-12">
-                          <h2>{item.title}</h2>
-                          Category:{" "}
-                          {item.category.map((cat) => (
-                            <i>{cat.title} . </i>
-                          ))}
-                          <p className="mt-3">{item.description}</p>
-                        </div>
-                      </Link>
+                    <div className="col-12">
+                      <h2>{item.title}</h2>
+                      Category:{" "}
+                      {item.category.map((cat) => (
+                        <i>{cat.title} . </i>
+                      ))}
+                      <p className="mt-3">{item.description}</p>
+                      <div className="text-right">
+                        <Link to={"/community/tutorials/" + item.id}>
+                          <button className="btn btn-primary text-decoration-none p-2 rounded-3 text-light ml-2">
+                            Read more
+                          </button>
+                        </Link>
+                      </div>
                     </div>
-                  </Link>
+                  </div>
                 ))}
               </div>
             ) : (

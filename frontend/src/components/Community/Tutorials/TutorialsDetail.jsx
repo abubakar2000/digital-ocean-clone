@@ -48,10 +48,13 @@ export default function TutorialsDetail() {
             />
             <p className="my-3">{item.description}</p>
             {item.steps.map((it) => (
-              <div
-                className="my-3"
-                dangerouslySetInnerHTML={{ __html: it.content.HTML }}
-              />
+              <div>
+                <h2>{it.title}</h2>
+                <div
+                  className="my-3"
+                  dangerouslySetInnerHTML={{ __html: it.content.HTML }}
+                />
+              </div>
             ))}
           </div>
         ))}

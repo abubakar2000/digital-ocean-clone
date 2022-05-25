@@ -78,7 +78,7 @@ export default function Questions() {
             )
             .map((item) => (
               <div
-                className="card col-9 p-1 my-2 rounded shadow-sm"
+                className="card col-9 p-1 my-2 rounded shadow"
                 style={{ margin: "0 auto" }}
               >
                 <div className="card-body  ">
@@ -94,16 +94,18 @@ export default function Questions() {
                         item.posted_date.indexOf("T")
                       )}{" "}
                       • {item.posted_by?.title} &nbsp;&nbsp;{" "}
-                      <Link to={"/community/questions/" + item.id}>
-                        <button className="btn btn-success text-decoration-none p-2 rounded-3 text-light ">
-                          Answer
-                        </button>
-                      </Link>
-                      <Link to={"/community/questions/" + item.id}>
-                        <button className="btn btn-primary text-decoration-none p-2 rounded-3 text-light ml-2">
-                          Comment
-                        </button>
-                      </Link>
+                      <div className="text-right">
+                        <Link to={"/community/questions/" + item.id}>
+                          <button className="btn btn-success text-decoration-none p-2 rounded-3 text-light ">
+                            Answer
+                          </button>
+                        </Link>
+                        <Link to={"/community/questions/" + item.id}>
+                          <button className="btn btn-primary text-decoration-none p-2 rounded-3 text-light ml-2">
+                            Comment
+                          </button>
+                        </Link>
+                      </div>
                     </p>
                   </div>
                 </div>

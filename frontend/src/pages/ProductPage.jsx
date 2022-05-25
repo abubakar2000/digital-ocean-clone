@@ -138,30 +138,7 @@ export default function ProductPage() {
           className="col-2"
           style={{ backgroundColor: "rgba(0, 0, 0, 0.4)" }}
         ></div>
-        <div
-          className="text-center"
-          style={{ backgroundColor: "rgba(0, 0, 0, 0.4)", margin: "0 auto" }}
-        >
-          <button className="btn btn-primary rounded-1 btn-md text-ligt py-2 m-1">
-            Signup with email
-          </button>
-          <button className="btn btn-light rounded-3 btn-md text-ligt py-2 m-1">
-            <img
-              src="https://www-static.cdn.prismic.io/www-static/7b66f955-63dd-41f5-a403-e6727b24d4ea_google-logo.svg"
-              alt=""
-              width="20"
-            />{" "}
-            Sign In with Gmail
-          </button>
-          <button className="btn btn-light rounded-3 btn-md text-ligt py-2 m-1">
-            <img
-              src="https://www-static.cdn.prismic.io/www-static/0a3e37e0-1706-41d5-98d1-854585205a5e_github-logo.svg"
-              alt=""
-              width="20"
-            />{" "}
-            Sign In with Github
-          </button>
-        </div>
+
         <div
           className="col-2"
           style={{ backgroundColor: "rgba(0, 0, 0, 0.4)" }}
@@ -204,7 +181,7 @@ export default function ProductPage() {
                               {item.title}
                             </Link>
                           </h4>
-                          <p>{item.description} ...</p>
+                          <p>{item.description.slice(0, 220)} ...</p>
                         </div>
                       </div>
 

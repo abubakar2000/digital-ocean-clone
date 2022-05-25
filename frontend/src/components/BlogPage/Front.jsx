@@ -109,7 +109,7 @@ export default function Front() {
                                 {item.title}
                               </Link>
                             </h4>
-                            <p>{item.description}...</p>
+                            <p>{item.description.slice(0, 180)}...</p>
                           </div>
                         </div>
                       </div>
