@@ -4,6 +4,7 @@ import Navbar from "../Navbar";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { apiip } from "../../../serverConfig";
+import { Accordion } from "react-bootstrap";
 
 export default function TutorialsDetail() {
   const { id } = useParams();
@@ -41,19 +42,25 @@ export default function TutorialsDetail() {
             <img
               alt="img"
               style={{ width: "100%", height: "400pt" }}
-              src={
-                apiip +
-                "/media/c2d421b7-dc1b-428a-aa95-cbe61c10bddb_open_graph-banner-1.png_0HCg5uE.webp"
-              }
+              src={apiip + item.image}
             />
             <p className="my-3">{item.description}</p>
             {item.steps.map((it) => (
               <div>
-                <h2>{it.title}</h2>
-                <div
-                  className="my-3"
-                  dangerouslySetInnerHTML={{ __html: it.content.HTML }}
-                />
+                <Accordion
+                  key={it.id}
+                  defaultActiveKey="0"
+                  style={{ marginBottom: "10pt" }}
+                >
+                  <Accordion.Item eventKey={it.id}>
+                    <Accordion.Header>{it.title}</Accordion.Header>
+                    <Accordion.Body>
+                      <div
+                        dangerouslySetInnerHTML={{ __html: it.content.HTML }}
+                      />
+                    </Accordion.Body>
+                  </Accordion.Item>
+                </Accordion>
               </div>
             ))}
           </div>

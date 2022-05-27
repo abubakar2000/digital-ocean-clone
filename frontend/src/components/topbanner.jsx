@@ -15,20 +15,25 @@ function TopBanner(props) {
         </div>
       </div>
       <div className="col-3 d-none d-lg-flex">
-        <div className="row m-2">
-          <div className="col-3">
+        <div className="row my-2">
+          <div className="col-2">
             <Link to={"/blog"} className="text-light">
               Blog
             </Link>
           </div>
-          <div className="col-3">
+          <div className="col-2">
             <Link to={"/docs"} className="text-light">
               Docs
             </Link>
           </div>
-          <div className="col-3">
+          <div className="col-2">
             <Link to={"/sales"} className="text-light">
               Sales
+            </Link>
+          </div>
+          <div className="col-5">
+            <Link to={"/contactus"} className="text-light">
+              Contact Us
             </Link>
           </div>
         </div>

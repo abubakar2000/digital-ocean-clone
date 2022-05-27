@@ -1,9 +1,10 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { apiip } from "../../../serverConfig";
 import { Link } from "react-router-dom";
 import Navbar from "../Navbar";
 import { useParams } from "react-router-dom";
+import { Editor, EditorState } from "draft-js";
 
 export default function QuestionsDetail() {
   const [questions, setQuestions] = useState([]);

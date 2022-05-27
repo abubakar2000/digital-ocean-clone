@@ -33,6 +33,7 @@ import Solutions from "./pages/Solutions";
 import SolutionDetails from "./components/Solutions/SolutionsDetails";
 import Search from "./pages/Search";
 import Sales from "./pages/Sales";
+import ContactUs from "./pages/ContactUs";
 
 function App() {
   return (
@@ -76,6 +77,9 @@ function App() {
 
           {/* Sales */}
           <Route path="/sales" element={<Sales />}></Route>
+
+          {/* Contact Us */}
+          <Route path="/contactus" element={<ContactUs />}></Route>
         </Route>
       </Switch>
       <Footer></Footer>

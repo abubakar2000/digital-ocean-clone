@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
 import { Link } from "react-router-dom";
-import Pricing from "../components/HomePage/Pricing";
 import "./style.css";
 
-export default function Sales() {
+export default function ContactUs() {
   return (
     <>
       <div>
@@ -12,11 +11,7 @@ export default function Sales() {
 
         <div className="container mb-5" style={{ marginTop: "70pt" }}>
           <div className="py-5 text-center">
-            <h1 className="mb-2">Contact our Sales team</h1>
-            <h4 className="mx-5">
-              Fill out this form for assistance with large deployments,
-              migration planning or questions regarding a proof of concept.
-            </h4>
+            <h1 className="mb-3">Contact Us</h1>
           </div>
 
           <div className="mt-4" style={{ marginBottom: "70pt" }}>
@@ -151,8 +146,6 @@ export default function Sales() {
             </div>
           </div>
         </div>
-
-        <Pricing></Pricing>
       </div>
     </>
   );

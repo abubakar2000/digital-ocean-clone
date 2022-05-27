@@ -172,27 +172,19 @@ export default function ProductPage() {
                       </div>
                       <div className="row my-5">
                         <div className="col-lg-12 align-self-center">
-                          <h4>
-                            <Link
-                              to={"/postdetails/" + item.id}
-                              className="text-decoration-none text-dark"
-                              style={{ fontSize: "24px" }}
-                            >
-                              {item.title}
-                            </Link>
-                          </h4>
+                          <h4>{item.title}</h4>
                           <p>{item.description.slice(0, 220)} ...</p>
                         </div>
                       </div>
 
-                      <div className="col-4">
+                      {/* <div className="col-4">
                         <Link
                           to={"/postdetails/" + item.id}
                           className="text-decoration-none bold"
                         >
                           Read More {">>"}
                         </Link>
-                      </div>
+                      </div> */}
                     </div>
                   </div>
                 </div>

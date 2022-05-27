@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./Footer.css";
 import {
   FaFacebookF,
@@ -7,8 +7,44 @@ import {
   FaYoutube,
   FaLinkedinIn,
 } from "react-icons/fa";
+import axios from "axios";
+import { apiip } from "../../serverConfig";
 
 const Footer = () => {
+  const [solutions, setSolutions] = useState([]);
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    var config = {
+      method: "get",
+      url: `${apiip}/solution/api/solutions/`,
+      headers: {},
+    };
+
+    axios(config)
+      .then(function (response) {
+        if (response.data.status === "ok") {
+          console.log(response.data.data);
+          setSolutions(response.data.data);
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
+    axios
+      .get(`${apiip}/products/api/products/`)
+      .then((res) => {
+        if (res.status === 200) {
+          console.log("Res -> ", res.data);
+          setProducts(res.data.data);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [axios]);
+
   return (
     <div
       className="footer container-fluied mt-5"
@@ -29,37 +65,13 @@ const Footer = () => {
                 <a href="/">About</a>
               </li>
               <li className="mb-1">
-                <a href="/">Leadership</a>
-              </li>
-              <li className="mb-1">
                 <a href="/blog">Blog</a>
               </li>
               <li className="mb-1">
-                <a href="/">Careers</a>
-              </li>
-              <li className="mb-1">
-                <a href="/">Customers</a>
-              </li>
-              <li className="mb-1">
-                <a href="/">Partners</a>
-              </li>
-              <li className="mb-1">
-                <a href="/">Referral Program</a>
-              </li>
-              <li className="mb-1">
-                <a href="/">Press</a>
+                <a href="/docs">Docs</a>
               </li>
               <li className="mb-1">
                 <a href="/">Legal</a>
-              </li>
-              <li className="mb-1">
-                <a href="/">Trust Platform</a>
-              </li>
-              <li className="mb-1">
-                <a href="/">Investor Relations</a>
-              </li>
-              <li className="mb-1">
-                <a href="/">DO Impact</a>
               </li>
             </ul>
           </div>
@@ -69,45 +81,13 @@ const Footer = () => {
               className="p-0"
               style={{ listStyle: "none", fontSize: "1.2rem" }}
             >
-              <li className="mb-1">
-                <a href="/product">About Products Overview</a>
-              </li>
-              <li className="mb-1">
-                <a href="/product">Droplets</a>
-              </li>
-              <li className="mb-1">
-                <a href="/product">Kubernetes</a>
-              </li>
-              <li className="mb-1">
-                <a href="/product">Managed Databases</a>
-              </li>
-              <li className="mb-1">
-                <a href="/product">Spaces</a>
-              </li>
-              <li className="mb-1">
-                <a href="/product">Marketplace</a>
-              </li>
-              <li className="mb-1">
-                <a href="/product">Load Balancers</a>
-              </li>
-              <li className="mb-1">
-                <a href="/product">Block Storage</a>
-              </li>
-              <li className="mb-1">
-                <a href="/product">Tools & Integrations</a>
-              </li>
-              <li className="mb-1">
-                <a href="/product">API</a>
-              </li>
-              <li className="mb-1">
-                <a href="/product">Pricing</a>
-              </li>
-              <li className="mb-1">
-                <a href="/product">Documentation</a>
-              </li>
-              <li className="mb-1">
-                <a href="/product">Release Notes</a>
-              </li>
+              {products.map((item) => {
+                return (
+                  <li className="mb-1">
+                    <a href={"/product"}>{item.title}</a>
+                  </li>
+                );
+              })}
             </ul>
           </div>
           <div className="col-md-2">
@@ -163,42 +143,13 @@ const Footer = () => {
               className="p-0"
               style={{ listStyle: "none", fontSize: "1.2rem" }}
             >
-              <li className="mb-1">
-                <a href="/solutions">Web & Mobile Apps</a>
-              </li>
-              <li className="mb-1">
-                <a href="/solutions">Website Hosting</a>
-              </li>
-              <li className="mb-1">
-                <a href="/solutions">Game Development</a>
-              </li>
-              <li className="mb-1">
-                <a href="/solutions">Streaming</a>
-              </li>
-              <li className="mb-1">
-                <a href="/solutions">VPN</a>
-              </li>
-              <li className="mb-1">
-                <a href="/solutions">Startups</a>
-              </li>
-              <li className="mb-1">
-                <a href="/solutions">SaaS Solutions</a>
-              </li>
-              <li className="mb-1">
-                <a href="/solutions">Agency & Web Dev Shops</a>
-              </li>
-              <li className="mb-1">
-                <a href="/solutions">Managed Cloud Hosting Providers</a>
-              </li>
-              <li className="mb-1">
-                <a href="/solutions">Big Data</a>
-              </li>
-              <li className="mb-1">
-                <a href="/solutions">Business Solutions</a>
-              </li>
-              <li className="mb-1">
-                <a href="/solutions">Cloud Hosting for Blockchain</a>
-              </li>
+              {solutions.map((item) => {
+                return (
+                  <li className="mb-1">
+                    <a href={"/solution/detail/" + item.id}>{item.title}</a>
+                  </li>
+                );
+              })}
             </ul>
           </div>
           <div className="col-md-2">
@@ -208,19 +159,19 @@ const Footer = () => {
               style={{ listStyle: "none", fontSize: "1.2rem" }}
             >
               <li className="mb-1">
-                <a href="/">Support</a>
+                <a href="/contactus">Support</a>
               </li>
               <li className="mb-1">
-                <a href="/">Sales</a>
+                <a href="/sales">Sales</a>
               </li>
               <li className="mb-1">
-                <a href="/">Report Abuse</a>
+                <a href="/contactus">Report Abuse</a>
               </li>
               <li className="mb-1">
-                <a href="/">System Status</a>
+                <a href="/sales">System Status</a>
               </li>
               <li className="mb-1">
-                <a href="/">Share your ideas</a>
+                <a href="/contactus">Share your ideas</a>
               </li>
             </ul>
           </div>

@@ -2,3 +2,7 @@
   color: white;
   text-decoration: none;
 }
+
+.footer ul a:hover {
+  text-decoration: underline;
+}

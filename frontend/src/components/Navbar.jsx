@@ -445,7 +445,7 @@ export default class Navbar extends Component {
                     {this.state.products.map((prd) => (
                       <div className="col-md-4">
                         <h6 className="bold">{prd.title}</h6>
-                        <ul>
+                        <ul className="p-0">
                           {prd.sub_products.map((si) => (
                             <li>{si.title}</li>
                           ))}
@@ -544,10 +544,10 @@ export default class Navbar extends Component {
                               <div className="row">
                                 <div className="col-3">
                                   <img
-                                    src="https://picsum.photos/70"
+                                    src={apiip + art.image}
                                     className="rounded-3"
                                     style={{ width: "70px", height: "70px" }}
-                                    alt=""
+                                    alt="img"
                                   />
                                 </div>
                                 <div className="col-8 text-left">
