@@ -1,10 +1,13 @@
 import axios from "axios";
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useCallback } from "react";
 import { apiip } from "../../../serverConfig";
 import { Link } from "react-router-dom";
 import Navbar from "../Navbar";
 import { useParams } from "react-router-dom";
-import { Editor, EditorState } from "draft-js";
+
+import EditorJs from "@natterstefan/react-editor-js";
+import { EDITOR_JS_TOOLS } from "./constants";
+import EditorJS from "@editorjs/editorjs";
 
 export default function QuestionsDetail() {
   const [questions, setQuestions] = useState([]);
@@ -33,7 +36,7 @@ export default function QuestionsDetail() {
       });
   };
 
-  const postAnswer = () => {
+  const postAnswer = (answer) => {
     if (answer !== "") {
       const headers = {
         authorization: "Token " + LoginKey,
@@ -84,6 +87,23 @@ export default function QuestionsDetail() {
     }
   };
 
+  const editor = new EditorJS({
+    tools: EDITOR_JS_TOOLS,
+    holder: "editorjs",
+  });
+
+  const EditorFirst = async () => {
+    await editor
+      .save()
+      .then((outputData) => {
+        console.log("Article data: ", outputData);
+        postAnswer(outputData.blocks);
+      })
+      .catch((error) => {
+        console.log("Saving failed: ", error);
+      });
+  };
+
   return (
     <div
       className="questions container-fluid"
@@ -115,26 +135,20 @@ export default function QuestionsDetail() {
                 <div className="row mt-5">
                   <div className="col-md-12">
                     <h4>Answer:</h4>
-                    <div style={{ position: "relative" }}>
-                      <textarea
-                        id="answer"
-                        value={answer}
-                        onChange={(e) => setAnswer(e.target.value)}
-                        style={{
-                          width: "100%",
-                          height: "150pt",
-                          resize: "none",
-                          padding: "10pt 20pt",
-                        }}
-                      />
+                    <div
+                      className="card shadow-sm"
+                      style={{ position: "relative" }}
+                    >
+                      <div id="editorjs"></div>
                       <button
                         className="btn btn-primary"
                         style={{
                           position: "absolute",
                           right: 20,
                           bottom: 25,
+                          zIndex: "99999999",
                         }}
-                        onClick={() => postAnswer()}
+                        onClick={() => EditorFirst()}
                       >
                         Submit
                       </button>
@@ -147,20 +161,22 @@ export default function QuestionsDetail() {
                     <h4>Comment:</h4>
                     <div style={{ position: "relative" }}>
                       <textarea
+                        className="card shadow-sm"
                         value={comment}
                         onChange={(e) => setComment(e.target.value)}
                         style={{
                           width: "100%",
                           resize: "none",
-                          padding: "7pt 20pt",
+                          padding: "27pt 20pt",
                         }}
                       />
+
                       <button
                         className="btn btn-primary"
                         style={{
                           position: "absolute",
                           right: 20,
-                          bottom: 20,
+                          bottom: 25,
                         }}
                         onClick={() => postComment()}
                       >
@@ -189,7 +205,7 @@ export default function QuestionsDetail() {
                                   : "https://i.imgur.com/hczKIze.jpg"
                               }
                               width="30"
-                              class="user-img rounded-circle mr-2 "
+                              className="user-img rounded-circle mr-2 "
                               alt="user"
                             />
                             <span>
