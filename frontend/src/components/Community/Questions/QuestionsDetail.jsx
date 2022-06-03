@@ -8,6 +8,7 @@ import { useParams } from "react-router-dom";
 import EditorJs from "@natterstefan/react-editor-js";
 import { EDITOR_JS_TOOLS } from "./constants";
 import EditorJS from "@editorjs/editorjs";
+import FormData from "form-data";
 
 export default function QuestionsDetail() {
   const [questions, setQuestions] = useState([]);
@@ -22,7 +23,7 @@ export default function QuestionsDetail() {
     setLoginKey(localStorage.getItem("loginKey"));
     axios.get();
     loadQuestionsData();
-    return () => {};
+    return () => { };
   }, [axios]);
 
   const loadQuestionsData = () => {
@@ -62,6 +63,33 @@ export default function QuestionsDetail() {
     }
   };
 
+
+
+  const PostAnswerV2 = (answer) => {
+    if (answer === "") {
+      return
+    }
+    
+    var formdata = new FormData()
+
+    formdata.append("question_id", parseInt(id));
+    formdata.append("answer", answer);
+
+    var requestOptions = {
+      method: 'POST',
+      body: formdata,
+      redirect: 'follow',
+      headers: {
+        'Authorization': 'Token d1b901fd47de64cf92299f8a137901af52a6958a'
+      }
+    };
+
+    fetch(`${apiip}/community/api/answer/`, requestOptions)
+      .then(response => response.text())
+      .then(result => console.log(result))
+      .catch(error => console.log('error', error));
+  }
+
   const postComment = () => {
     if (comment !== "") {
       const headers = {
@@ -78,6 +106,7 @@ export default function QuestionsDetail() {
         .post(`${apiip}/community/api/comment/`, { body }, { headers })
         .then((res) => {
           console.log(res.data);
+          alert("Posted Anser Successfully")
         })
         .catch((err) => {
           alert("Cannot comment right now!");
@@ -93,11 +122,17 @@ export default function QuestionsDetail() {
   });
 
   const EditorFirst = async () => {
+
+
     await editor
       .save()
       .then((outputData) => {
         console.log("Article data: ", outputData);
-        postAnswer(outputData.blocks);
+        // postAnswer(outputData.blocks);
+
+        PostAnswerV2(outputData.blocks)
+
+
       })
       .catch((error) => {
         console.log("Saving failed: ", error);
