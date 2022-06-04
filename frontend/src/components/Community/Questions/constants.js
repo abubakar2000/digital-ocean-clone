@@ -31,3 +31,8 @@ export const EDITOR_JS_TOOLS = {
   inlineCode: InlineCode,
   simpleImage: SimpleImage,
 };
+
+export const EDITOR_JS_TOOLS2 = {
+  linkTool: LinkTool,
+  inlineCode: InlineCode,
+};

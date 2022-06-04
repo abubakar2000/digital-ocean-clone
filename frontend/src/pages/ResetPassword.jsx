@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 import axios from "axios";
 import { apiip } from "../serverConfig";
+import FormData from "form-data";
 
 export default function ResetPassword() {
   const [password, setPassword] = useState("");
@@ -18,77 +19,89 @@ export default function ResetPassword() {
     if (password === "" || confirm_password === "") {
       alert("Input data!");
     } else {
-      const body = {
-        new_password1: password,
-        new_password2: confirm_password,
+      var myHeaders = new Headers();
+      myHeaders.append("Authorization", "Token " + LoginKey);
+
+      var formdata = new FormData();
+      formdata.append("new_password1", password);
+      formdata.append("new_password2", confirm_password);
+
+      var requestOptions = {
+        method: "POST",
+        headers: myHeaders,
+        body: formdata,
+        redirect: "follow",
       };
 
-      axios
-        .post(`${apiip}/api/accounts/auth/password/change/`, body)
-        .then((res) => {
-          if (res.status === 200) {
-            console.log("Res -> ", res);
-            navigate("/login");
+      fetch(`${apiip}/api/accounts/auth/password/change/`, requestOptions)
+        .then((result) => {
+          if (result.status === 200) {
+            alert("Password reset successful!");
+            navigate("/");
+          } else {
+            alert("Can't reset password.");
           }
         })
-        .catch((err) => {
-          alert("Cannot login!");
-        });
+        .catch((error) => console.log("error", error));
     }
   };
 
-  const sendOTP = () => {
-    if (email === "") {
-      alert("Input data!");
-    } else {
-      if (ValidatedEmail !== true) {
-        alert("Enter Valid Email!");
-      } else {
-        const body = {
-          email: email,
-        };
+  const [LoginKey, setLoginKey] = useState("");
 
-        axios
-          .post(`${apiip}/api/accounts/auth/password/change/`, body)
-          .then((res) => {
-            if (res.status === 200) {
-              console.log("Res -> ", res);
-              setCheck(1);
-              navigate("/login");
-            }
-          })
-          .catch((err) => {
-            alert("Cannot login!");
-          });
-      }
-    }
+  useEffect(() => {
+    setLoginKey(localStorage.getItem("loginKey"));
+  }, []);
+
+  const sendOTP = () => {
+    var myHeaders = new Headers();
+    myHeaders.append("Authorization", "Token " + LoginKey);
+
+    var requestOptions = {
+      method: "GET",
+      headers: myHeaders,
+      redirect: "follow",
+    };
+
+    fetch(`${apiip}/api/accounts/sendotp`, requestOptions)
+      .then((result) => {
+        if (result.status === 200) {
+          alert("OTP sent! Please check your email.");
+          setCheck(1);
+        } else {
+          alert("Can't send OTP.");
+        }
+      })
+      .catch((error) => console.log("error", error));
   };
 
   const VerifyOTP = () => {
-    if (otp === "") {
-      alert("Input data!");
-    } else {
-      const body = {
-        otp: otp,
-      };
+    var myHeaders = new Headers();
+    myHeaders.append("Authorization", "Token " + LoginKey);
 
-      axios
-        .post(`${apiip}/api/accounts/auth/password/change/`, body)
-        .then((res) => {
-          if (res.status === 200) {
-            console.log("Res -> ", res);
-            setCheck(2);
-            navigate("/login");
-          }
-        })
-        .catch((err) => {
-          alert("Cannot login!");
-        });
-    }
+    var formdata = new FormData();
+    formdata.append("otp", otp);
+
+    var requestOptions = {
+      method: "POST",
+      headers: myHeaders,
+      body: formdata,
+      redirect: "follow",
+    };
+
+    fetch(`${apiip}/api/accounts/verifyotp/`, requestOptions)
+      .then((result) => {
+        if (result.status === 200) {
+          alert("OTP Verified!");
+          setCheck(2);
+        } else {
+          alert("Invalid OTP.");
+        }
+      })
+      .catch((error) => console.log("error", error));
   };
 
   const [resendCode, setResenddCode] = useState(false);
-  const [timerCount, setTimer] = useState(15);
+  const [timerCount, setTimer] = useState(50);
 
   useEffect(() => {
     if (resendCode !== false) {
@@ -103,7 +116,7 @@ export default function ResetPassword() {
 
   useEffect(() => {
     if (timerCount === 0) {
-      setTimer(15);
+      setTimer(50);
       setResenddCode(false);
     }
   }, [resendCode, timerCount]);
@@ -113,6 +126,7 @@ export default function ResetPassword() {
   }, []);
 
   const [check, setCheck] = useState(0);
+
   return (
     <div
       className="login container-fluid"
@@ -137,7 +151,7 @@ export default function ResetPassword() {
               Enter the email address associated with your account and we will
               send you a link to reset your password.
             </p>
-            <div className="mb-3">
+            {/* <div className="mb-3">
               <label htmlFor="pass">Email Address</label>
               <input
                 type="email"
@@ -148,11 +162,11 @@ export default function ResetPassword() {
                 onInput={(e) => setEmail(e.target.value)}
                 style={{ color: "black" }}
               />
-            </div>
+            </div> */}
             <button
               type="button"
               className="btn btn-custom btn-lg btn-block mt-3"
-              onClick={() => (sendOTP(), setCheck(1))}
+              onClick={() => sendOTP()}
             >
               SEND OTP
             </button>
@@ -186,7 +200,7 @@ export default function ResetPassword() {
                     cursor: "pointer",
                     fontSize: "14px",
                     width: `${
-                      resendCode === false && timerCount === 15
+                      resendCode === false && timerCount === 50
                         ? "70pt"
                         : "100pt"
                     }`,
@@ -194,17 +208,18 @@ export default function ResetPassword() {
                     border: "none",
                   }}
                   onClick={() => {
-                    resendCode === false && timerCount === 15
+                    resendCode === false && timerCount === 50
                       ? setResenddCode(true)
                       : setResenddCode(false);
+                    sendOTP();
 
                     // props.sendEmail(props.email, props.user_type);
                   }}
                   disabled={
-                    resendCode === false && timerCount === 15 ? null : true
+                    resendCode === false && timerCount === 50 ? null : true
                   }
                 >
-                  {resendCode === false && timerCount === 15
+                  {resendCode === false && timerCount === 50
                     ? "RESEND OTP"
                     : "Resend code in " + timerCount}
                 </button>
@@ -213,7 +228,7 @@ export default function ResetPassword() {
             <button
               type="button"
               className="btn btn-custom btn-lg btn-block mt-3"
-              onClick={() => (VerifyOTP(), setCheck(2))}
+              onClick={() => VerifyOTP()}
             >
               VERIFY OTP
             </button>

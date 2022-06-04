@@ -6,7 +6,7 @@ import Navbar from "../Navbar";
 import { useParams } from "react-router-dom";
 
 import EditorJs from "@natterstefan/react-editor-js";
-import { EDITOR_JS_TOOLS } from "./constants";
+import { EDITOR_JS_TOOLS, EDITOR_JS_TOOLS2 } from "./constants";
 import EditorJS from "@editorjs/editorjs";
 import FormData from "form-data";
 
@@ -14,16 +14,13 @@ export default function QuestionsDetail() {
   const [questions, setQuestions] = useState([]);
   const { id } = useParams();
 
-  const [answer, setAnswer] = useState("");
-  const [comment, setComment] = useState("");
-
   const [LoginKey, setLoginKey] = useState("");
 
   useEffect(() => {
     setLoginKey(localStorage.getItem("loginKey"));
     axios.get();
     loadQuestionsData();
-    return () => { };
+    return () => {};
   }, [axios]);
 
   const loadQuestionsData = () => {
@@ -37,83 +34,32 @@ export default function QuestionsDetail() {
       });
   };
 
-  const postAnswer = (answer) => {
-    if (answer !== "") {
-      const headers = {
-        authorization: "Token " + LoginKey,
-      };
-
-      const body = {
-        question_id: parseInt(id),
-        answer: answer,
-      };
-
-      console.log(body, headers);
-
-      axios
-        .post(`${apiip}/community/api/answer/`, { body }, { headers })
-        .then((res) => {
-          console.log(res);
-        })
-        .catch((err) => {
-          alert("Cannot answer right now!");
-        });
-    } else {
-      alert("Write your answer!");
-    }
-  };
-
-
-
   const PostAnswerV2 = (answer) => {
     if (answer === "") {
-      return
+      return;
     }
-    
-    var formdata = new FormData()
+
+    var formdata = new FormData();
 
     formdata.append("question_id", parseInt(id));
     formdata.append("answer", answer);
 
     var requestOptions = {
-      method: 'POST',
+      method: "POST",
       body: formdata,
-      redirect: 'follow',
+      redirect: "follow",
       headers: {
-        'Authorization': 'Token d1b901fd47de64cf92299f8a137901af52a6958a'
-      }
+        Authorization: "Token " + LoginKey,
+      },
     };
 
     fetch(`${apiip}/community/api/answer/`, requestOptions)
-      .then(response => response.text())
-      .then(result => console.log(result))
-      .catch(error => console.log('error', error));
-  }
-
-  const postComment = () => {
-    if (comment !== "") {
-      const headers = {
-        authorization: "Token " + LoginKey,
-      };
-
-      const body = {
-        question_id: parseInt(id),
-        comment: comment,
-      };
-
-      console.log(body, headers);
-      axios
-        .post(`${apiip}/community/api/comment/`, { body }, { headers })
-        .then((res) => {
-          console.log(res.data);
-          alert("Posted Anser Successfully")
-        })
-        .catch((err) => {
-          alert("Cannot comment right now!");
-        });
-    } else {
-      alert("Write your comment!");
-    }
+      .then((result) => {
+        if (result.statusText) {
+          alert("Answer submitted!");
+        }
+      })
+      .catch((error) => console.log("error", error));
   };
 
   const editor = new EditorJS({
@@ -122,17 +68,62 @@ export default function QuestionsDetail() {
   });
 
   const EditorFirst = async () => {
-
-
     await editor
       .save()
       .then((outputData) => {
         console.log("Article data: ", outputData);
         // postAnswer(outputData.blocks);
 
-        PostAnswerV2(outputData.blocks)
+        PostAnswerV2(outputData.blocks);
+      })
+      .catch((error) => {
+        console.log("Saving failed: ", error);
+      });
+  };
 
+  const PostComment = (comment) => {
+    if (comment === "") {
+      return;
+    }
 
+    console.log("This is the comment: ", comment);
+
+    var formdata = new FormData();
+
+    formdata.append("question_id", parseInt(id));
+    formdata.append("comment", comment);
+
+    var requestOptions = {
+      method: "POST",
+      body: formdata,
+      redirect: "follow",
+      headers: {
+        Authorization: "Token " + LoginKey,
+      },
+    };
+
+    fetch(`${apiip}/community/api/comment/`, requestOptions)
+      .then((result) => {
+        if (result.statusText) {
+          alert("Comment submitted!");
+        }
+      })
+      .catch((error) => console.log("error", error));
+  };
+
+  const editor2 = new EditorJS({
+    tools: EDITOR_JS_TOOLS2,
+    holder: "editorjs2",
+  });
+
+  const EditorFirst2 = async () => {
+    await editor2
+      .save()
+      .then((outputData) => {
+        console.log("Article data: ", outputData);
+        // postAnswer(outputData.blocks);
+
+        PostComment(outputData.blocks);
       })
       .catch((error) => {
         console.log("Saving failed: ", error);
@@ -194,26 +185,20 @@ export default function QuestionsDetail() {
                 <div className="row mt-4">
                   <div className="col-md-12">
                     <h4>Comment:</h4>
-                    <div style={{ position: "relative" }}>
-                      <textarea
-                        className="card shadow-sm"
-                        value={comment}
-                        onChange={(e) => setComment(e.target.value)}
-                        style={{
-                          width: "100%",
-                          resize: "none",
-                          padding: "27pt 20pt",
-                        }}
-                      />
-
+                    <div
+                      className="card shadow-sm"
+                      style={{ position: "relative" }}
+                    >
+                      <div id="editorjs2"></div>
                       <button
                         className="btn btn-primary"
                         style={{
                           position: "absolute",
                           right: 20,
                           bottom: 25,
+                          zIndex: "99999999",
                         }}
-                        onClick={() => postComment()}
+                        onClick={() => EditorFirst2()}
                       >
                         Submit
                       </button>
@@ -247,7 +232,9 @@ export default function QuestionsDetail() {
                               <small className="font-weight-bold text-primary">
                                 {c.user.username}
                               </small>{" "}
-                              <small className="">{c.comment}</small>
+                              <small className="">
+                                {c.comment?.data?.text}
+                              </small>
                             </span>
                           </div>
                           <div className="col-2">

@@ -387,13 +387,15 @@ export default class Navbar extends Component {
                         class="dropdown-menu"
                         aria-labelledby="dropdownMenuButton"
                       >
-                        <p
-                          class="dropdown-item text-primary m-0"
-                          onClick={this.handleShow}
-                          style={{ cursor: "pointer", fontWeight: "bold" }}
-                        >
-                          Change Password
-                        </p>
+                        <Link to="/resetpassword" className="py-1">
+                          <p
+                            class="dropdown-item text-primary m-0"
+                            style={{ cursor: "pointer", fontWeight: "bold" }}
+                          >
+                            Change Password
+                          </p>
+                        </Link>
+
                         <p
                           class="dropdown-item text-primary m-0"
                           style={{ cursor: "pointer", fontWeight: "bold" }}

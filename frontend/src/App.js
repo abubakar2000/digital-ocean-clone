@@ -43,7 +43,6 @@ function App() {
       <Switch>
         <Route path="/register" element={<Register />}></Route>
         <Route path="/login" element={<Login />}></Route>
-        <Route path="/resetpassword" element={<ResetPassword />}></Route>
         <Route path="/" element={<HomePage />}></Route>
 
         <Route element={<ProtectedRoutes />}>
@@ -80,6 +79,9 @@ function App() {
 
           {/* Contact Us */}
           <Route path="/contactus" element={<ContactUs />}></Route>
+
+          {/*Reset Password*/}
+          <Route path="/resetpassword" element={<ResetPassword />}></Route>
         </Route>
       </Switch>
       <Footer></Footer>
