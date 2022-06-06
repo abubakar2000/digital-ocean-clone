@@ -9,8 +9,10 @@ export default function Sales() {
     <>
       <div>
         <Navbar></Navbar>
+          <br/>
+          <br/>
 
-        <div className="container mb-5" style={{ marginTop: "70pt" }}>
+        {/* <div className="container mb-5" style={{ marginTop: "70pt" }}>
           <div className="py-5 text-center">
             <h1 className="mb-2">Contact our Sales team</h1>
             <h4 className="mx-5">
@@ -68,7 +70,7 @@ export default function Sales() {
               </div>
             </div> */}
 
-            {/* <div className="row mb-5">
+        {/* <div className="row mb-5">
               <div className="col-md-6">
                 <label>Which products & services are you considering?</label>
                 <select className="form-input" style={{ width: "90%" }}>
@@ -103,7 +105,7 @@ export default function Sales() {
               </div>
             </div> */}
 
-            {/* <div className="row mb-5">
+        {/* <div className="row mb-5">
               <div className="col-md-6">
                 <label>
                   What is your total monthly spend on cloud infrastructure?
@@ -129,7 +131,7 @@ export default function Sales() {
                   </option>
                 </select>
               </div>
-            </div> */}
+            </div> 
 
             <div className="row mb-5">
               <div className="col-md-6">
@@ -149,7 +151,8 @@ export default function Sales() {
               </div>
             </div>
           </div>
-        </div>
+        </div> 
+            */}
 
         <Pricing></Pricing>
       </div>

@@ -53,7 +53,7 @@ export default function DocDetails() {
         </div>
       </div>
       {!loader ? (
-        <div className="container row">
+        <div className="container row" style={{marginTop:'5vh'}}>
           {solution.map((item) => (
             <div className="col-md-12">
               <h2 className="mb-4 text-center col-md-12">{item.title}</h2>

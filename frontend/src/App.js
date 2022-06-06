@@ -34,6 +34,8 @@ import SolutionDetails from "./components/Solutions/SolutionsDetails";
 import Search from "./pages/Search";
 import Sales from "./pages/Sales";
 import ContactUs from "./pages/ContactUs";
+import About from "./pages/About";
+import Legal from "./pages/Legal";
 
 function App() {
   return (
@@ -43,6 +45,8 @@ function App() {
       <Switch>
         <Route path="/register" element={<Register />}></Route>
         <Route path="/login" element={<Login />}></Route>
+        <Route path="/about" element={<About />}></Route>
+        <Route path="/legal" element={<Legal />}></Route>
         <Route path="/" element={<HomePage />}></Route>
 
         <Route element={<ProtectedRoutes />}>

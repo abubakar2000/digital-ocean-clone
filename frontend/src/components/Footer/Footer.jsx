@@ -62,7 +62,7 @@ const Footer = () => {
               style={{ listStyle: "none", fontSize: "1.2rem" }}
             >
               <li className="mb-1 ">
-                <a href="/">About</a>
+                <a href="/about">About</a>
               </li>
               <li className="mb-1">
                 <a href="/blog">Blog</a>
@@ -71,7 +71,7 @@ const Footer = () => {
                 <a href="/docs">Docs</a>
               </li>
               <li className="mb-1">
-                <a href="/">Legal</a>
+                <a href="/legal">Legal</a>
               </li>
             </ul>
           </div>

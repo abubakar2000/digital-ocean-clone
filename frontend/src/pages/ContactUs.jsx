@@ -11,7 +11,11 @@ export default function ContactUs() {
 
         <div className="container mb-5" style={{ marginTop: "70pt" }}>
           <div className="py-5 text-center">
-            <h1 className="mb-3">Contact Us</h1>
+            <h1 className="mb-2">Contact our Sales team</h1>
+            <h5 style={{marginTop:'20pt'}} className="mx-5">
+              Fill out this form for assistance with large deployments,
+              migration planning or questions regarding a proof of concept.
+            </h5>
           </div>
 
           <div className="mt-4" style={{ marginBottom: "70pt" }}>
@@ -37,7 +41,7 @@ export default function ContactUs() {
               </div>
             </div>
 
-            <div className="row mb-5">
+            {/* <div className="row mb-5">
               <div className="col-md-6">
                 <label>
                   Country (please select the country where you company is
@@ -61,9 +65,9 @@ export default function ContactUs() {
                 <label>Company:</label>
                 <input className="form-input" style={{ width: "90%" }} />
               </div>
-            </div>
+            </div> */}
 
-            <div className="row mb-5">
+            {/* <div className="row mb-5">
               <div className="col-md-6">
                 <label>Which products & services are you considering?</label>
                 <select className="form-input" style={{ width: "90%" }}>
@@ -96,9 +100,9 @@ export default function ContactUs() {
                   <option value="AN">NETHERLANDS ANTILLES</option>
                 </select>
               </div>
-            </div>
+            </div> */}
 
-            <div className="row mb-5">
+            {/* <div className="row mb-5">
               <div className="col-md-6">
                 <label>
                   What is your total monthly spend on cloud infrastructure?
@@ -124,13 +128,12 @@ export default function ContactUs() {
                   </option>
                 </select>
               </div>
-            </div>
+            </div> */}
 
             <div className="row mb-5">
               <div className="col-md-6">
                 <label>
-                  What is the biggest challenge you are trying to solve with
-                  this project?
+                  What is the Issue you are facing?
                 </label>
                 <textarea className="textarea-input" style={{ width: "90%" }} />
               </div>
@@ -141,7 +144,7 @@ export default function ContactUs() {
                 className="col-md-12"
                 style={{ display: "flex", justifyContent: "center" }}
               >
-                <button className="btn btn-primary">Talk To An Expert</button>
+                <button className="btn btn-primary">Contact us</button>
               </div>
             </div>
           </div>

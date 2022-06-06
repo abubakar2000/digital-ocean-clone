@@ -39,11 +39,20 @@ export default function TutorialsDetail() {
                 <i>{cat.title} /</i>
               ))}
             </h5>
-            <img
+            {/* <img
               alt="img"
               style={{ width: "100%", height: "400pt" }}
               src={apiip + item.image}
-            />
+            /> */}
+
+            <div style={{height:'60vh',width:'100%',
+            backgroundImage:`url(${apiip + item.image})`,
+            backgroundRepeat:'no-repeat',backgroundPosition:'center',
+            backgroundSize:'contain'}}>
+
+            </div>
+
+
             <p className="my-3">{item.description}</p>
             {item.steps.map((it) => (
               <div>
