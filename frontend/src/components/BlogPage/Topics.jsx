@@ -46,8 +46,8 @@ export default function Topics() {
             <div className="col-5">
               <img
                 src={
-                  item?.image
-                    ? apiip + item.image
+                  item?.images
+                    ? apiip + "/" + item.images[0]
                     : "https://picsum.photos/500/300?random=2"
                 }
                 alt=""

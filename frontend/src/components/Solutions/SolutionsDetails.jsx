@@ -7,10 +7,13 @@ import { useParams } from "react-router-dom";
 import ReactPlayer from "react-player";
 import Navbar from "../Navbar";
 import "./solutions.css";
+import { TailSpin } from "react-loader-spinner";
 
 export default function DocDetails() {
   const { id } = useParams();
   const [solution, setSolution] = useState([]);
+
+  const [loader, setLoader] = useState(true);
   useEffect(() => {
     var config = {
       method: "get",
@@ -21,7 +24,9 @@ export default function DocDetails() {
     axios(config)
       .then(function (response) {
         if (response.data.status === "ok") {
+          console.log("SOLUTION --------------> ", response.data.data);
           setSolution(response.data.data);
+          setLoader(false);
         }
       })
       .catch(function (error) {
@@ -32,7 +37,6 @@ export default function DocDetails() {
   return (
     <div className="topics text-center" style={{ marginTop: "60pt" }}>
       <Navbar />
-
       <div className="solution-header">
         <div className="container">
           <h1 className="text-center text-white">
@@ -48,18 +52,15 @@ export default function DocDetails() {
           </h4>
         </div>
       </div>
-
-      <div
-        className="container py-5"
-        style={{ display: "flex", alignItems: "center" }}
-      >
-        <div className="row" style={{ justifyContent: "space-between" }}>
+      {!loader ? (
+        <div className="container row">
           {solution.map((item) => (
-            <div>
-              <h2 className="mb-4 text-center ">{item.title}</h2>
+            <div className="col-md-12">
+              <h2 className="mb-4 text-center col-md-12">{item.title}</h2>
+              <h5 className="mb-4 text-center col-md-12">{item.description}</h5>
 
-              <div className="mb-5">
-                <h4 className="text-center mb-4">{item?.section_one?.title}</h4>
+              <div className="mb-5" style={{ marginTop: "70pt" }}>
+                <h3 className="text-center mb-4">{item?.section_one?.title}</h3>
                 <div className="row">
                   {item?.section_one?.cards?.map((s1) => (
                     <div className="col-md-3">
@@ -172,7 +173,14 @@ export default function DocDetails() {
             </div>
           ))}
         </div>
-      </div>
+      ) : (
+        <div
+          className="container my-5"
+          style={{ display: "grid", placeItems: "center" }}
+        >
+          <TailSpin height="100" width="100" color="grey" ariaLabel="loading" />
+        </div>
+      )}
     </div>
   );
 }

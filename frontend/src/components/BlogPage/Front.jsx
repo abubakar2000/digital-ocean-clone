@@ -15,7 +15,7 @@ export default function Front() {
       .get(`${apiip}/blog/api/blog/`)
       .then((res) => {
         if (res.status === 200) {
-          console.log("Res -> ", res.data);
+          console.log("Res -> ", res.data.data[0].images[0]);
           setBlogs(res.data.data);
         }
       })
@@ -43,8 +43,8 @@ export default function Front() {
                         <div className="d-flex align-items-center">
                           <img
                             src={
-                              item?.image
-                                ? apiip + item.image
+                              item?.images
+                                ? apiip + "/" + item.images[0]
                                 : "https://picsum.photos/200"
                             }
                             style={{ width: "100%", height: "200px" }}

@@ -88,6 +88,15 @@ const Footer = () => {
                   </li>
                 );
               })}
+              {products.map((item) => {
+                return item.sub_products?.map((subItems) => {
+                  return (
+                    <li className="mb-1">
+                      <a href={"/product"}>{subItems?.title}</a>
+                    </li>
+                  );
+                });
+              })}
             </ul>
           </div>
           <div className="col-md-2">
@@ -100,40 +109,10 @@ const Footer = () => {
                 <a href="/tutorials">Tutorials</a>
               </li>
               <li className="mb-1">
-                <a href="/community">Meetups</a>
-              </li>
-              <li className="mb-1">
-                <a href="/community">Q&A</a>
+                <a href="/community/questions">Q&A</a>
               </li>
               <li className="mb-1">
                 <a href="/community">CSS-Tricks</a>
-              </li>
-              <li className="mb-1">
-                <a href="/community">Write for DOnations</a>
-              </li>
-              <li className="mb-1">
-                <a href="/community">Droplets for Demos</a>
-              </li>
-              <li className="mb-1">
-                <a href="/community">Hatch Startup Program</a>
-              </li>
-              <li className="mb-1">
-                <a href="/community">Shop Swag</a>
-              </li>
-              <li className="mb-1">
-                <a href="/community">Research Program</a>
-              </li>
-              <li className="mb-1">
-                <a href="/community">Currents Research</a>
-              </li>
-              <li className="mb-1">
-                <a href="/community">Open Source</a>
-              </li>
-              <li className="mb-1">
-                <a href="/community">Code of Conduct</a>
-              </li>
-              <li className="mb-1">
-                <a href="/community">Newsletter Signup</a>
               </li>
             </ul>
           </div>
@@ -163,15 +142,6 @@ const Footer = () => {
               </li>
               <li className="mb-1">
                 <a href="/sales">Sales</a>
-              </li>
-              <li className="mb-1">
-                <a href="/contactus">Report Abuse</a>
-              </li>
-              <li className="mb-1">
-                <a href="/sales">System Status</a>
-              </li>
-              <li className="mb-1">
-                <a href="/contactus">Share your ideas</a>
               </li>
             </ul>
           </div>
