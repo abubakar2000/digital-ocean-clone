@@ -38,33 +38,40 @@ export default function Pricing() {
 
         <div className="pricing6">
           <div className="container">
-            <div className="row mt-4">
+            <div className="row mt-4" style={{display:'flex',flexWrap:'wrap',justifyContent:'center'}}>
               {pricing
                 .filter((fl) => fl.id === 1)
                 .map((item) => {
                   return (
-                    <div className="col-md-12">
-                      <div className="card card-shadow border-0 mb-4">
-                        <div className="card-body p-4">
-                          <div className="d-flex align-items-center">
-                            <h5 className="font-weight-medium mb-0">
-                              {item.title}
-                            </h5>
-                            <div className="ml-auto">
-                              &nbsp;
-                              <span className="badge badge-danger font-weight-normal p-2">
-                                Popular
-                              </span>
-                            </div>
+                    <div className="col-md-4">
+                      <div style={{ padding: '15pt', backgroundColor: 'white',borderRadius:'10pt',boxShadow:'0pt 0pt 10pt gainsboro' }} >
+                        <div>
+                          <div style={{ color: 'black', fontWeight: 'bold' }}>{item.title}</div>
+                        </div>
+                        <div className="row">
+                          <div className="col-lg-5" style={{ fontSize: 'xx-large', 
+                          color: '#2086f3', display: 'flex', 
+                          alignItems: 'center',fontWeight:'bold' }}>
+                            <b>${item.hourly_rate}</b><sub>/hour</sub>
                           </div>
+                          <div className="col-lg-7" >
+                            <ul className="list-inline pl-3 font-14 font-weight-medium text-dark">
+                              <li style={{ marginBottom: '2pt', marginTop: '2pt' }}>
+                                <span>✔️ Memory: {item.memory.memory}</span>
+                              </li>
+                              <li style={{ marginBottom: '2pt', marginTop: '2pt' }}>
+                                <span>✔️ vCPU: {item.vCPU.vCPU}</span>
+                              </li>
+                              <li style={{ marginBottom: '2pt', marginTop: '2pt' }} >
+                                <span>✔️ Disk: {item.disk.disk}</span>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                        <div>
                           <div className="row">
-                            <div className="col-lg-5 text-center">
+                            <div className="col-lg-12 text-center">
                               <div className="price-box my-3">
-                                <sup>$</sup>
-                                <span className="text-dark display-5">
-                                  {item.hourly_rate}
-                                </span>
-                                <h6 className="font-weight-light">HOURLY</h6>
                                 <a
                                   className="btn btn-info-gradiant font-14 border-0 text-white p-3 btn-block mt-3"
                                   href="/product"
@@ -73,74 +80,158 @@ export default function Pricing() {
                                 </a>
                               </div>
                             </div>
-                            <div className="col-lg-7 align-self-center">
-                              <ul className="list-inline pl-3 font-14 font-weight-medium text-dark">
-                                <li className="py-2">
-                                  <i className="icon-check text-info mr-2"></i>{" "}
-                                  <span>Memory: {item.memory.memory}</span>
-                                </li>
-                                <li className="py-2">
-                                  <i className="icon-check text-info mr-2"></i>{" "}
-                                  <span>vCPU: {item.vCPU.vCPU}</span>
-                                </li>
-                                <li className="py-2">
-                                  <i className="icon-check text-info mr-2"></i>{" "}
-                                  <span>Disk: {item.disk.disk}</span>
-                                </li>
-                              </ul>
-                            </div>
                           </div>
                         </div>
                       </div>
+                      {/*  
+                    // <div className="col-md-6">
+                    //   <div className="card card-shadow border-0 mb-4">
+                    //     <div className="card-body p-4">
+                    //       <div className="d-flex align-items-center">
+                    //         <h5 className="font-weight-medium mb-0">
+                    //           {item.title}
+                    //         </h5>
+                    //         <div className="ml-auto">
+                    //           &nbsp;
+                    //           <span className="badge badge-danger font-weight-normal p-2">
+                    //             Popular
+                    //           </span>
+                    //         </div>
+                    //       </div>
+                    //       <div className="row">
+                    //         <div className="col-lg-5 text-center">
+                    //           <div className="price-box my-3">
+                    //             <sup>$</sup>
+                    //             <span className="text-dark display-5">
+                    //               {item.hourly_rate}
+                    //             </span>
+                    //             <h6 className="font-weight-light">HOURLY</h6>
+                    //             <a
+                    //               className="btn btn-info-gradiant font-14 border-0 text-white p-3 btn-block mt-3"
+                    //               href="/product"
+                    //             >
+                    //               CHOOSE PLAN{" "}
+                    //             </a>
+                    //           </div>
+                    //         </div>
+                    //         <div className="col-lg-7 align-self-center">
+                    //           <ul className="list-inline pl-3 font-14 font-weight-medium text-dark">
+                    //             <li className="py-2">
+                    //               <i className="icon-check text-info mr-2"></i>{" "}
+                    //               <span>Memory: {item.memory.memory}</span>
+                    //             </li>
+                    //             <li className="py-2">
+                    //               <i className="icon-check text-info mr-2"></i>{" "}
+                    //               <span>vCPU: {item.vCPU.vCPU}</span>
+                    //             </li>
+                    //             <li className="py-2">
+                    //               <i className="icon-check text-info mr-2"></i>{" "}
+                    //               <span>Disk: {item.disk.disk}</span>
+                    //             </li>
+                    //           </ul>
+                    //         </div>
+                    //       </div>
+                    //     </div>
+                    //   </div>
+                  */}
                     </div>
                   );
                 })}
-
               {pricing
                 .filter((fl) => fl.id !== 1)
                 .map((item) => {
                   return (
-                    <div className="col-md-6">
-                      <div className="card card-shadow border-0 mb-4">
-                        <div className="card-body p-4">
-                          <div className="d-flex align-items-center">
-                            <h5 className="font-medium m-b-0">{item.title}</h5>
+                    <div className="col-md-4">
+                      <div style={{ padding: '15pt', backgroundColor: 'white',borderRadius:'10pt',boxShadow:'0pt 0pt 10pt gainsboro' }} >
+                        <div>
+                          <div style={{ color: 'black', fontWeight: 'bold' }}>{item.title}</div>
+                        </div>
+                        <div className="row">
+                          <div className="col-lg-5" style={{ fontSize: 'xx-large', 
+                          color: '#2086f3', display: 'flex', 
+                          alignItems: 'center',fontWeight:'bold' }}>
+                            <b>${item.hourly_rate}</b><sub>/hour</sub>
                           </div>
+                          <div className="col-lg-7" >
+                            <ul className="list-inline pl-3 font-14 font-weight-medium text-dark">
+                              <li style={{ marginBottom: '2pt', marginTop: '2pt' }}>
+                                <span>✔️ Memory: {item.memory.memory}</span>
+                              </li>
+                              <li style={{ marginBottom: '2pt', marginTop: '2pt' }}>
+                                <span>✔️ vCPU: {item.vCPU.vCPU}</span>
+                              </li>
+                              <li style={{ marginBottom: '2pt', marginTop: '2pt' }} >
+                                <span>✔️ Disk: {item.disk.disk}</span>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                        <div>
                           <div className="row">
-                            <div className="col-lg-5 text-center">
+                            <div className="col-lg-12 text-center">
                               <div className="price-box my-3">
-                                <sup>$</sup>
-                                <span className="text-dark display-5">
-                                  {item.hourly_rate}
-                                </span>
-                                <h6 className="font-weight-light">HOURLY</h6>
                                 <a
-                                  className="btn btn-info-gradiant border-0 font-14 text-white p-3 btn-block mt-3"
+                                  className="btn btn-info-gradiant font-14 border-0 text-white p-3 btn-block mt-3"
                                   href="/product"
                                 >
                                   CHOOSE PLAN{" "}
                                 </a>
                               </div>
                             </div>
-                            <div className="col-lg-7 align-self-center">
-                              <ul className="list-inline pl-3 font-14 font-weight-medium text-dark">
-                                <li className="py-2">
-                                  <i className="icon-check text-info mr-2"></i>{" "}
-                                  <span>Memory: {item.memory.memory}</span>
-                                </li>
-                                <li className="py-2">
-                                  <i className="icon-check text-info mr-2"></i>{" "}
-                                  <span>vCPU: {item.vCPU.vCPU}</span>
-                                </li>
-                                <li className="py-2">
-                                  <i className="icon-check text-info mr-2"></i>{" "}
-                                  <span>Disk: {item.disk.disk}</span>
-                                </li>
-                              </ul>
-                            </div>
                           </div>
                         </div>
                       </div>
+                      {/*  
+                    // <div className="col-md-6">
+                    //   <div className="card card-shadow border-0 mb-4">
+                    //     <div className="card-body p-4">
+                    //       <div className="d-flex align-items-center">
+                    //         <h5 className="font-weight-medium mb-0">
+                    //           {item.title}
+                    //         </h5>
+                    //         <div className="ml-auto">
+                    //           &nbsp;
+                    //           <span className="badge badge-danger font-weight-normal p-2">
+                    //             Popular
+                    //           </span>
+                    //         </div>
+                    //       </div>
+                    //       <div className="row">
+                    //         <div className="col-lg-5 text-center">
+                    //           <div className="price-box my-3">
+                    //             <sup>$</sup>
+                    //             <span className="text-dark display-5">
+                    //               {item.hourly_rate}
+                    //             </span>
+                    //             <h6 className="font-weight-light">HOURLY</h6>
+                    //             <a
+                    //               className="btn btn-info-gradiant font-14 border-0 text-white p-3 btn-block mt-3"
+                    //               href="/product"
+                    //             >
+                    //               CHOOSE PLAN{" "}
+                    //             </a>
+                    //           </div>
+                    //         </div>
+                    //         <div className="col-lg-7 align-self-center">
+                    //           <ul className="list-inline pl-3 font-14 font-weight-medium text-dark">
+                    //             <li className="py-2">
+                    //               <i className="icon-check text-info mr-2"></i>{" "}
+                    //               <span>Memory: {item.memory.memory}</span>
+                    //             </li>
+                    //             <li className="py-2">
+                    //               <i className="icon-check text-info mr-2"></i>{" "}
+                    //               <span>vCPU: {item.vCPU.vCPU}</span>
+                    //             </li>
+                    //             <li className="py-2">
+                    //               <i className="icon-check text-info mr-2"></i>{" "}
+                    //               <span>Disk: {item.disk.disk}</span>
+                    //             </li>
+                    //           </ul>
+                    //         </div>
+                    //       </div>
+                    //     </div>
+                    //   </div>
+                  */}
                     </div>
                   );
                 })}

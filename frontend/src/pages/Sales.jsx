@@ -42,7 +42,7 @@ export default function Sales() {
               </div>
             </div>
 
-            <div className="row mb-5">
+            {/* <div className="row mb-5">
               <div className="col-md-6">
                 <label>
                   Country (please select the country where you company is
@@ -66,9 +66,9 @@ export default function Sales() {
                 <label>Company:</label>
                 <input className="form-input" style={{ width: "90%" }} />
               </div>
-            </div>
+            </div> */}
 
-            <div className="row mb-5">
+            {/* <div className="row mb-5">
               <div className="col-md-6">
                 <label>Which products & services are you considering?</label>
                 <select className="form-input" style={{ width: "90%" }}>
@@ -101,9 +101,9 @@ export default function Sales() {
                   <option value="AN">NETHERLANDS ANTILLES</option>
                 </select>
               </div>
-            </div>
+            </div> */}
 
-            <div className="row mb-5">
+            {/* <div className="row mb-5">
               <div className="col-md-6">
                 <label>
                   What is your total monthly spend on cloud infrastructure?
@@ -129,13 +129,12 @@ export default function Sales() {
                   </option>
                 </select>
               </div>
-            </div>
+            </div> */}
 
             <div className="row mb-5">
               <div className="col-md-6">
                 <label>
-                  What is the biggest challenge you are trying to solve with
-                  this project?
+                  What is the Issue you are facing?
                 </label>
                 <textarea className="textarea-input" style={{ width: "90%" }} />
               </div>
@@ -146,7 +145,7 @@ export default function Sales() {
                 className="col-md-12"
                 style={{ display: "flex", justifyContent: "center" }}
               >
-                <button className="btn btn-primary">Talk To An Expert</button>
+                <button className="btn btn-primary">Contact us</button>
               </div>
             </div>
           </div>
