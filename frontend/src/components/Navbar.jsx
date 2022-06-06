@@ -473,16 +473,16 @@ export default class Navbar extends Component {
                     {this.state.solutions?.map((sl) => (
                       <div className="col-md-4">
                         <div className="card custom-card text-dark">
-                          <Link
+                          <a
                             // key={sl.title}
                             className="text-decoration-none text-dark"
-                            to={"/solution/detail/" + sl.id}
+                            href={"/solution/detail/" + sl.id}
                           >
                             <div>
                               <h5>{sl.title}</h5>
                               {/* <p>{sl.description}</p> */}
                             </div>
-                          </Link>
+                          </a>
                         </div>
                       </div>
                     ))}
@@ -553,12 +553,12 @@ export default class Navbar extends Component {
                                   />
                                 </div>
                                 <div className="col-8 text-left">
-                                  <Link
-                                    to={"/postdetails/" + art.id}
+                                  <a
+                                    href={"/postdetails/" + art.id}
                                     className="text-black text-decoration-none"
                                   >
                                     <p>{art.title}</p>
-                                  </Link>
+                                  </a>
                                 </div>
                               </div>
                             </li>

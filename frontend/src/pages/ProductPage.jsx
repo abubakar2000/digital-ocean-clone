@@ -75,18 +75,60 @@ export default function ProductPage() {
     axios
       .get(`${apiip}/products/api/product-by-id/?id=${id}`)
       .then((res) => {
-        console.log(res.data.data);
+        console.log("SPECIFIC PRODUCT --->  ", res.data.data);
         if (res.status === 200) {
+          OFFCanvas();
           setSpecificProduct(res.data.data.page_info);
           setSpecificProductTitle(res.data.data.title);
           // console.log(res.data.data.page_info.docs.map((item) => item.title));
-          setSpecificProductDocs(res.data.data.page_info.docs);
-          handleShow();
+          setSpecificProductDocs(res.data.data?.page_info?.docs);
         }
       })
+      .then(() => handleShow())
       .catch((err) => {
         console.log(err);
       });
+  };
+
+  const OFFCanvas = () => {
+    return (
+      <Offcanvas show={show} onHide={handleClose}>
+        <Offcanvas.Header closeButton>
+          <Offcanvas.Title>{SpecificProductTitle}</Offcanvas.Title>
+        </Offcanvas.Header>
+        <Offcanvas.Body>
+          <h3>{SpecificProduct?.title}</h3>
+
+          {SpecificProduct?.description}
+
+          {SpecificProductDocs?.map((item) => (
+            <div className="card rounded col-sm-12 mb-3 mt-3">
+              <div className="card-body">
+                <h3>{item.title}</h3>
+
+                {item.steps.map((it) => (
+                  <Accordion
+                    defaultActiveKey="0"
+                    style={{ marginBottom: "10pt" }}
+                  >
+                    <Accordion.Item eventKey={it.id}>
+                      <Accordion.Header>{it.title}</Accordion.Header>
+                      <Accordion.Body>
+                        <div
+                          dangerouslySetInnerHTML={{
+                            __html: it.HTML,
+                          }}
+                        />
+                      </Accordion.Body>
+                    </Accordion.Item>
+                  </Accordion>
+                ))}
+              </div>
+            </div>
+          ))}
+        </Offcanvas.Body>
+      </Offcanvas>
+    );
   };
 
   return (
@@ -220,50 +262,7 @@ export default function ProductPage() {
                           </div>
                         ))}
 
-                        <Offcanvas show={show} onHide={handleClose}>
-                          <Offcanvas.Header closeButton>
-                            {SpecificProduct && (
-                              <Offcanvas.Title>
-                                {SpecificProductTitle}
-                              </Offcanvas.Title>
-                            )}
-                          </Offcanvas.Header>
-                          {SpecificProduct && (
-                            <Offcanvas.Body>
-                              <h3>{SpecificProduct.title}</h3>
-
-                              {SpecificProduct.description}
-
-                              {SpecificProductDocs.map((item) => (
-                                <div className="card rounded col-sm-12 mb-3 mt-3">
-                                  <div className="card-body">
-                                    <h3>{item.title}</h3>
-
-                                    {item.steps.map((it) => (
-                                      <Accordion
-                                        defaultActiveKey="0"
-                                        style={{ marginBottom: "10pt" }}
-                                      >
-                                        <Accordion.Item eventKey={it.id}>
-                                          <Accordion.Header>
-                                            {it.title}
-                                          </Accordion.Header>
-                                          <Accordion.Body>
-                                            <div
-                                              dangerouslySetInnerHTML={{
-                                                __html: it.HTML,
-                                              }}
-                                            />
-                                          </Accordion.Body>
-                                        </Accordion.Item>
-                                      </Accordion>
-                                    ))}
-                                  </div>
-                                </div>
-                              ))}
-                            </Offcanvas.Body>
-                          )}
-                        </Offcanvas>
+                        <OFFCanvas />
                       </div>
                     </div>
                   </div>
@@ -337,7 +336,7 @@ export default function ProductPage() {
                   </div>
                 ))}
 
-                {/*Premium Pricing*/}
+                {/* Premium Pricing*/}
                 {/* <div
                   className="col-md-6"
                   style={{ fontSize: "11px", border: "50px" }}

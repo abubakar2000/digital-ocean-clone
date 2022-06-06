@@ -15,7 +15,7 @@ export default function Topics() {
     axios(config)
       .then(function (response) {
         if (response.data.status === "ok") {
-          console.log(response.data.data);
+          console.log("docs ------> ", response.data.data);
           setDocs(response.data.data);
         }
       })
